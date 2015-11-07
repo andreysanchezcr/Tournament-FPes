@@ -1,4 +1,4 @@
----------obtener jugadores en un equipo
+---------obtener jugador en un equipo
 CREATE OR REPLACE PROCEDURE  get_Team_P(p_recordset out sys_refcursor,id_ in number) as
 begin
   open p_recordset for
@@ -12,6 +12,7 @@ begin
         RAISE;
 END get_Team_P;
 
+------------Obtener premios de un equipo
 CREATE OR REPLACE PROCEDURE  get_Team_Award(p_recordset out sys_refcursor,id_ in number) as
 begin
   open p_recordset for
@@ -24,6 +25,8 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END get_Team_Award;
+
+
 
 CREATE OR REPLACE PROCEDURE  get_Stadiums_in_event(p_recordset out sys_refcursor,id_ in number) as
 begin
@@ -98,6 +101,9 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END get_Stadium;
+
+
+
 
 
 

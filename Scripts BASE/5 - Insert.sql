@@ -1,12 +1,11 @@
 CREATE OR REPLACE PROCEDURE insert_ActType(a_name IN VARCHAR2)
 AS tot_emps NUMBER;
 BEGIN
-  INSERT INTO Action_Type(Id_Actiontype,Name_Actiontype)
+  INSERT INTO Action_Type(Id_Actiontype,Description)
     VALUES(seq_acttype.nextval,a_name);
   COMMIT;
   tot_emps:=tot_emps-1;
 END;
-
 
 --Updates
 
@@ -14,7 +13,7 @@ create or replace procedure update_ActType(id_ in number,a_nombre in varchar2)
 as tot_emps number;
 begin
   update Action_Type
-  set Name_actiontype=a_nombre
+  set action_type.description=a_nombre
 
   where Action_Type.Id_Actiontype=id_;
   commit;
@@ -309,14 +308,12 @@ end;
 
 
 
---Verificar los parametros que hacen falta
---Eliminar el campo place
 
-CREATE OR REPLACE PROCEDURE insert_Stadium(nombre in varchar2,capacid in number,ciudad in number)
+CREATE OR REPLACE PROCEDURE insert_Stadium(nombre in varchar2,capacid in number,ciudad in number, foto in  blob)
 AS tot_emps NUMBER;
 BEGIN
-  INSERT INTO Stadium(Id_Stadium,Name_Stadium,Capasity,Fk_City_Id)
-    VALUES(seq_stadium.nextval,nombre,capacid,ciudad);
+  INSERT INTO Stadium(Id_Stadium,Name_Stadium,Capasity,Fk_City_Id,Photo)
+    VALUES(seq_stadium.nextval,nombre,capacid,ciudad,foto);
   COMMIT;
   tot_emps:=tot_emps-1;
 END;
@@ -326,15 +323,13 @@ create or replace procedure update_Stadium(id_ in number,a_nombre in varchar2,pa
 as tot_emps number;
 begin
   update Stadium
-  set Stadium.Name_Stadium=a_nombre,Stadium.Capasity=param2,stadium.place=lugar,stadium.photo=foto,stadium.fk_city_id=ciudad
+  set Stadium.Name_Stadium=a_nombre,Stadium.Capasity=param2,stadium.photo=foto,stadium.fk_city_id=ciudad
 
   where stadium.id_stadium=id_;
   commit;
   tot_emps:=tot_emps-1;
 end;
 
-
---Falta verificar la foto
 
 CREATE OR REPLACE PROCEDURE insert_Team(nombre in varchar2, foto in blob, capitan in number)
 AS tot_emps NUMBER;

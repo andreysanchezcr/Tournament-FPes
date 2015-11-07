@@ -163,7 +163,8 @@ CREATE TABLE Player
        fk_team_id number(6),
        t_shirt_num NUMBER(2),
        photo BLOB,
-       fk_city_id NUMBER(6),
+       fk_country_id NUMBER(6),
+       genre number(1), ---Si es hombre, va a estar en 1, mujer será 0
        --Campos de Auditoria
        fec_creacion    DATE, 
        creado_por      VARCHAR2(10),
@@ -176,6 +177,13 @@ ALTER TABLE Team
       USING INDEX
       TABLESPACE lu_ind PCTFREE 20
       STORAGE(INITIAL 10K NEXT 10K PCTINCREASE 0);
+--PrimaryKey
+ALTER TABLE Player
+      ADD CONSTRAINT pk_player_id PRIMARY KEY(id_player)
+      USING INDEX
+      TABLESPACE lu_ind PCTFREE 20
+      STORAGE(INITIAL 10K NEXT 10K PCTINCREASE 0);
+      
 --ForeingKey
 ALTER TABLE Team
       ADD CONSTRAINT fk_captain_id FOREIGN KEY(fk_captain_id)
@@ -184,16 +192,11 @@ ALTER TABLE Team
 
 
 
---PrimaryKey
-ALTER TABLE Player
-      ADD CONSTRAINT pk_player_id PRIMARY KEY(id_player)
-      USING INDEX
-      TABLESPACE lu_ind PCTFREE 20
-      STORAGE(INITIAL 10K NEXT 10K PCTINCREASE 0);
+
 --ForeingKey
 ALTER TABLE Player
-      ADD CONSTRAINT fk_cityPlayer_id FOREIGN KEY(fk_city_id)
-      REFERENCES City(id_city);
+      ADD CONSTRAINT fk_country_id_player FOREIGN KEY(fk_country_id)
+      REFERENCES Country(id_country);
 alter table player
       ADD CONSTRAINT fk_teamPlayer_id FOREIGN KEY(fk_team_id)
       REFERENCES Team(id_team);
