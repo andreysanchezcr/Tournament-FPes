@@ -1,0 +1,49 @@
+prompt Importing table user_tables...
+set feedback off
+set define off
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tablePLAYER_X_POSITIONcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableCOUNTRYcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableCITYcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableSTADIUMcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableADMINcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tablePARAMETERcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableEVENTcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tablePLAYERcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableGROUPPcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableTEAMcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableAWARDcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tablePOSITIONcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableALIGNcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableMATCHcascade constraints;');
+
+insert into user_tables ('DROPTABLE'||TABLE_NAME||'CASC)
+values ('drop tableEVENT_X_TEAMcascade constraints;');
+
+prompt Done.
