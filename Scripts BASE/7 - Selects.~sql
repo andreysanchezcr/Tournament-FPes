@@ -102,6 +102,57 @@ begin
         RAISE;
 END get_Stadium;
 
+---------obtener jugador en un equipo
+CREATE OR REPLACE PROCEDURE  get_all_Players(p_recordset out sys_refcursorr) as
+begin
+  open p_recordset for
+  
+  Select player.first_name,player.last_name,player.photo from player;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Team_P;
+
+-----Buscar todos los jugadores que cumplan con el nombre, apellido o nickname
+-----Si se quiere obtener todos los jugadores el parametro se manda con comillas
+
+CREATE OR REPLACE PROCEDURE get_Players_Nombre(p_recordset out sys_refcursor,nombre in varchar2) as
+begin
+  open p_recordset for
+
+  Select player.first_name,player.last_name,player.photo from player where player.first_name like nombre || '%' or player.nickname like nombre || '%' or
+  player.last_name like nombre || '%';
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Players_Nombre;
+
+
+
+----hombre = 1, mujer = 0
+
+
+
+CREATE OR REPLACE PROCEDURE  get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in number) as
+begin
+  open p_recordset for
+  
+  Select player.first_name,player.last_name,player.photo from player where (player.fk_team_id=equipo or equipo is null) and (player.genre=genero or genero is null) and (player.fk_country_id=nacionalidad or nacionalidad is null);
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Players_Filtros;
+
+
 
 
 

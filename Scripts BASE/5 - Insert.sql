@@ -167,20 +167,27 @@ end;
 
 
 
-CREATE OR REPLACE PROCEDURE insert_Event(nombre in varchar2,descc in varchar2,feInicio in date,feFinal in date)
+CREATE OR REPLACE PROCEDURE insert_Event(nombre in varchar2,descc in varchar2,feInicio in varchar2,feFinal in varchar2)
 AS tot_emps NUMBER;
 BEGIN
   INSERT INTO event(id_event,name_event,description,start_date,end_date)
-    VALUES(seq_event.nextval,nombre,descc,feInicio,feFinal);
+    VALUES(seq_event.nextval,nombre,descc,TO_DATE(feInicio,'yyyy/mm/dd'),TO_DATE(feFinal,'yyyy/mm/dd'));
   COMMIT;
   tot_emps:=tot_emps-1;
 END;
 
-create or replace procedure update_Event(id_ in number,a_nombre in varchar2,param2 in number,param3 in varchar2,param4 in date,param5 in date)
+
+
+
+
+
+
+
+create or replace procedure update_Event(id_ in number,a_nombre in varchar2,param2 in number,param3 in varchar2,param4 in varchar2,param5 in varchar2)
 as tot_emps number;
 begin
   update Event
-  set event.name_event=a_nombre,event.description=param3,event.start_date=param4,event.end_date=param5
+  set event.name_event=a_nombre,event.description=param3,event.start_date=TO_DATE(param4,'yyyy/mm/dd'),event.end_date=TO_DATE(param5,'yyyy/mm/dd')
 
   where event.id_event=id_;
   commit;
@@ -226,21 +233,22 @@ end;
 
 
 
-CREATE OR REPLACE PROCEDURE insert_Match(nombre in varchar2,equipo1 in number,equipo2 in number,alin1 in number,alin2 in number,fecha in date)
+CREATE OR REPLACE PROCEDURE insert_Match(nombre in varchar2,equipo1 in number,equipo2 in number,alin1 in number,alin2 in number,fecha in varchar2)
 AS tot_emps NUMBER;
 BEGIN
   INSERT INTO match(id_match,name_match,fk_teamone_id,fk_teamtwo_id,fk_alignone_id,fk_aligntwo_id,start_date)
-    VALUES(seq_match.nextval,nombre,equipo1,equipo2,alin1,alin2,fecha);
+    VALUES(seq_match.nextval,nombre,equipo1,equipo2,alin1,alin2,TO_DATE(fecha,'yyyy/mm/dd hh24:mi:ss'));
   COMMIT;
   tot_emps:=tot_emps-1;
 END;
 
 
-create or replace procedure update_Match(id_ in number,a_nombre in varchar2,param2 in date,equipo1 in number,equipo2 in number,alin1 in number,alin2 in number)
+
+create or replace procedure update_Match(id_ in number,a_nombre in varchar2,param2 in varchar2,equipo1 in number,equipo2 in number,alin1 in number,alin2 in number)
 as tot_emps number;
 begin
   update match
-  set match.name_match=a_nombre,match.start_date=param2,match.fk_teamone_id=equipo1,match.fk_teamtwo_id=equipo2
+  set match.name_match=a_nombre,match.start_date=TO_DATE(param2,'yyyy/mm/dd hh24:mi:ss'),match.fk_teamone_id=equipo1,match.fk_teamtwo_id=equipo2
   ,match.fk_alignone_id=alin1
   ,match.fk_aligntwo_id=alin2
 
