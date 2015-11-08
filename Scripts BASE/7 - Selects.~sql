@@ -1,9 +1,9 @@
----------obtener jugador en un equipo
+---------obtener jugadores en un equipo
 CREATE OR REPLACE PROCEDURE  get_Team_P(p_recordset out sys_refcursor,id_ in number) as
 begin
   open p_recordset for
   
-  Select player.first_name,player.last_name,player.photo from player where player.fk_team_id=id_;
+  Select player.id_player,player.first_name,player.last_name,player.photo from player where player.fk_team_id=id_;
 
   exception
     when NO_DATA_FOUND THEN
@@ -17,7 +17,7 @@ CREATE OR REPLACE PROCEDURE  get_Team_Award(p_recordset out sys_refcursor,id_ in
 begin
   open p_recordset for
   
-  Select award.name_award from Award where award.fk_team_id=id_;
+  Select award.id_award,award.name_award from Award where award.fk_team_id=id_;
 
   exception
     when NO_DATA_FOUND THEN
@@ -46,7 +46,7 @@ CREATE OR REPLACE PROCEDURE  get_Countries(p_recordset out sys_refcursor,id_ in 
 begin
   open p_recordset for
   
-  Select country.name_country from country;
+  Select country.id_country,country.name_country from country;
 
   exception
     when NO_DATA_FOUND THEN
@@ -60,7 +60,7 @@ CREATE OR REPLACE PROCEDURE  get_City_in_Country(p_recordset out sys_refcursor,i
 begin
   open p_recordset for
   
-  Select city.name_city where city.fk_country_id=id_;
+  Select city.id_city,city.name_city where city.fk_country_id=id_;
 
   exception
     when NO_DATA_FOUND THEN
@@ -68,6 +68,7 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END get_City_in_Country;
+
 --Obtener toda la informacion de un jugador
 CREATE OR REPLACE PROCEDURE get_Player(p_recordset out sys_refcursor,id_ in number) as
 begin
@@ -91,7 +92,7 @@ CREATE OR REPLACE PROCEDURE get_Stadium(p_recordset out sys_refcursor,id_ in num
 begin
   open p_recordset for
 
-  select name_stadium,capasity,photo,name_city,name_country from (select * from (Select stadium.name_stadium,stadium.capasity,stadium.photo,stadium.fk_city_id from stadium where stadium.id_stadium=id_)
+  select stadium.id_stadium,name_stadium,capasity,photo,name_city,name_country from (select * from (Select stadium.name_stadium,stadium.capasity,stadium.photo,stadium.fk_city_id from stadium where stadium.id_stadium=id_)
    A full outer join (select city.id_city as ciudad,city.name_city, city.fk_country_id from city) B on A.FK_CITY_ID=B.CIUDAD   ) full outer join country 
  on fk_country_id=country.id_country ;
 
@@ -107,7 +108,7 @@ CREATE OR REPLACE PROCEDURE  get_all_Players(p_recordset out sys_refcursorr) as
 begin
   open p_recordset for
   
-  Select player.first_name,player.last_name,player.photo from player;
+  Select player.id_player,player.first_name,player.last_name,player.photo from player;
 
   exception
     when NO_DATA_FOUND THEN
@@ -123,7 +124,7 @@ CREATE OR REPLACE PROCEDURE get_Players_Nombre(p_recordset out sys_refcursor,nom
 begin
   open p_recordset for
 
-  Select player.first_name,player.last_name,player.photo from player where player.first_name like nombre || '%' or player.nickname like nombre || '%' or
+  Select player.id_player,player.first_name,player.last_name,player.photo from player where player.first_name like nombre || '%' or player.nickname like nombre || '%' or
   player.last_name like nombre || '%';
 
   exception
@@ -143,7 +144,7 @@ CREATE OR REPLACE PROCEDURE  get_Players_Filtros(p_recordset out sys_refcursor,g
 begin
   open p_recordset for
   
-  Select player.first_name,player.last_name,player.photo from player where (player.fk_team_id=equipo or equipo is null) and (player.genre=genero or genero is null) and (player.fk_country_id=nacionalidad or nacionalidad is null);
+  Select player.id_player,player.first_name,player.last_name,player.photo from player where (player.fk_team_id=equipo or equipo is null) and (player.genre=genero or genero is null) and (player.fk_country_id=nacionalidad or nacionalidad is null);
 
   exception
     when NO_DATA_FOUND THEN
@@ -155,6 +156,95 @@ END get_Players_Filtros;
 
 
 
+---------Obtener todos los partidos en una fecha
+CREATE OR REPLACE PROCEDURE get_match(p_recordset out sys_refcursor,fecha in varchar2) as
+begin
+  open p_recordset for
+
+  Select match.id_match,match.name_match,to_char(match.start_date,'HH24:mm'),match.fk_teamone_id,match.fk_teamtwo_id from match where to_char(match.start_date,'yyyy/mm/dd')=fecha;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_match;
 
 
+---------Obtener Estadisticas de un partido en especifico(id)
+CREATE OR REPLACE PROCEDURE get_matchStadistics(p_recordset out sys_refcursor,id_accion in number) as
+begin
+  open p_recordset for
+
+  Select count(action_x_player.fk_action_type_id) from action_x_player where action_x_player.fk_action_type_id=id_accion;
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_matchStadistics;
+
+
+
+---------Obtener Estadisticas de un partido en especifico(id)
+CREATE OR REPLACE PROCEDURE get_timeLine(p_recordset out sys_refcursor,id_ in number) as
+begin
+  open p_recordset for
+
+  select action_x_player.fk_action_type_id,action_x_player.fk_player_id where id_=action_x_player.fk_match_id;
+  
+  
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_timeLine;
+
+---------Obtener todas las acciones
+CREATE OR REPLACE PROCEDURE get_AllActions(p_recordset out sys_refcursor) as
+begin
+  open p_recordset for
+
+  select action_type.id_actiontype,action_type.description from action_type;
+  
+  
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_AllActions;
+
+
+---------Obtener todas las acciones
+CREATE OR REPLACE PROCEDURE get_AllPlayers(p_recordset out sys_refcursor) as
+begin
+  open p_recordset for
+
+  select player.id_player,player.first_name,player.last_name,player.nickname player.fk_team_id from player;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_AllPlayers;
+
+
+---------Obtener todos los paises
+CREATE OR REPLACE PROCEDURE get_AllCountries(p_recordset out sys_refcursor) as
+begin
+  open p_recordset for
+
+  select country.id_country,country.name_country from country;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_AllCountries;
 

@@ -186,7 +186,7 @@ END get_matchStadistics;
 
 
 
----------Obtener Estadisticas de un partido en especifico(id)
+---------Obtener Timeline de un partido
 CREATE OR REPLACE PROCEDURE get_timeLine(p_recordset out sys_refcursor,id_ in number) as
 begin
   open p_recordset for
@@ -219,7 +219,7 @@ begin
 END get_AllActions;
 
 
----------Obtener todas las acciones
+---------Obtener todos los jugadores
 CREATE OR REPLACE PROCEDURE get_AllPlayers(p_recordset out sys_refcursor) as
 begin
   open p_recordset for
