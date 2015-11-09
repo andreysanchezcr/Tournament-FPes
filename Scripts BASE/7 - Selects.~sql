@@ -27,20 +27,6 @@ begin
 END get_Team_Award;
 
 
-
-CREATE OR REPLACE PROCEDURE  get_Stadiums_in_event(p_recordset out sys_refcursor,id_ in number) as
-begin
-  open p_recordset for
-  
-  ---FAlta agregar esta funcion
-
-  exception
-    when NO_DATA_FOUND THEN
-      NULL;
-      WHEN OTHERS THEN
-        RAISE;
-END get_Stadiums_in_event;
-
 ---------Obtener todos los paises
 CREATE OR REPLACE PROCEDURE  get_Countries(p_recordset out sys_refcursor,id_ in number) as
 begin
@@ -60,7 +46,7 @@ CREATE OR REPLACE PROCEDURE  get_City_in_Country(p_recordset out sys_refcursor,i
 begin
   open p_recordset for
   
-  Select city.id_city,city.name_city where city.fk_country_id=id_;
+  Select city.id_city,city.name_city from City where city.fk_country_id=id_;
 
   exception
     when NO_DATA_FOUND THEN
@@ -92,7 +78,7 @@ CREATE OR REPLACE PROCEDURE get_Stadium(p_recordset out sys_refcursor,id_ in num
 begin
   open p_recordset for
 
-  select stadium.id_stadium,name_stadium,capasity,photo,name_city,name_country from (select * from (Select stadium.name_stadium,stadium.capasity,stadium.photo,stadium.fk_city_id from stadium where stadium.id_stadium=id_)
+  select id_stadium,name_stadium,capasity,photo,name_city,name_country from (select * from (Select id_stadium,name_stadium,capasity,photo,fk_city_id from Stadium where stadium.id_stadium=id_)
    A full outer join (select city.id_city as ciudad,city.name_city, city.fk_country_id from city) B on A.FK_CITY_ID=B.CIUDAD   ) full outer join country 
  on fk_country_id=country.id_country ;
 
@@ -104,7 +90,7 @@ begin
 END get_Stadium;
 
 ---------obtener jugador en un equipo
-CREATE OR REPLACE PROCEDURE  get_all_Players(p_recordset out sys_refcursorr) as
+CREATE OR REPLACE PROCEDURE  get_all_Players(p_recordset out sys_refcursor) as
 begin
   open p_recordset for
   
@@ -115,7 +101,7 @@ begin
       NULL;
       WHEN OTHERS THEN
         RAISE;
-END get_Team_P;
+END get_all_Players;
 
 -----Buscar todos los jugadores que cumplan con el nombre, apellido o nickname
 -----Si se quiere obtener todos los jugadores el parametro se manda con comillas
@@ -186,12 +172,12 @@ END get_matchStadistics;
 
 
 
----------Obtener Estadisticas de un partido en especifico(id)
+---------Obtener Timeline de un partido
 CREATE OR REPLACE PROCEDURE get_timeLine(p_recordset out sys_refcursor,id_ in number) as
 begin
   open p_recordset for
 
-  select action_x_player.fk_action_type_id,action_x_player.fk_player_id where id_=action_x_player.fk_match_id;
+  select fk_action_type_id,fk_player_id from Action_x_player where id_=action_x_player.fk_match_id;
   
   
   
@@ -219,12 +205,12 @@ begin
 END get_AllActions;
 
 
----------Obtener todas las acciones
+---------Obtener todos los jugadores
 CREATE OR REPLACE PROCEDURE get_AllPlayers(p_recordset out sys_refcursor) as
 begin
   open p_recordset for
 
-  select player.id_player,player.first_name,player.last_name,player.nickname player.fk_team_id from player;
+  select id_player,first_name,last_name,nickname, fk_team_id from player;
 
   exception
     when NO_DATA_FOUND THEN
@@ -248,3 +234,18 @@ begin
         RAISE;
 END get_AllCountries;
 
+---------------------
+
+
+CREATE OR REPLACE PROCEDURE  get_Stadiums_in_event(p_recordset out sys_refcursor,id_ in number) as
+begin
+  open p_recordset for
+  
+  ---FAlta agregar esta funcion
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Stadiums_in_event;
