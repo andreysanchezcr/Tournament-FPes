@@ -1,0 +1,98 @@
+*
+{padding: 0px; margin: 0px;}
+a{text-decoration:none;}
+body
+{
+        background-image: url('../img/cancha.jpg');
+        background-size: 130% auto;
+        background-attachment: fixed;
+        background-position: 0 -167px ;
+
+    	background-repeat: no-repeat;
+
+}
+
+.Evento_Seg_Titulo 
+{
+	font-size: 25px;
+	border-bottom: 5px solid #037971;
+	width: 900px;
+	display: block;
+	margin: 0px auto;
+	background: rgba(4,154,143,0.5);
+	padding: 5px;
+	text-align: center;
+	
+}
+.ContenerdorEventos
+{
+	width: 900px;
+	display: block;
+	margin: 0px auto;
+
+}
+.Evento
+{
+	display: inline-block;
+	width: 416px;
+	height: 160px;
+	background: rgba(100,120,100, 0.2);
+	margin: 7px;
+	padding: 5px;
+}
+.Evento_Foto_Box
+{
+	float: left;
+	width: 100px;
+	height: 150px;
+	background: rgba(120,140,120,0.2);
+	
+}
+.Evento_Info_Box
+{
+	float: left;
+	width: 290px;
+	height: 100%;
+	margin-left: 10px;
+	background: rgba(120,140,120,0.2);
+}
+.Evento_fecha
+{
+	margin-top: 10px;
+	font-size: 12px;
+	text-align: center;
+	background: rgba(120,140,120,0.2);
+}
+.Evento_Nombre
+{
+	font-size: 18px;
+	text-transform: uppercase;
+	text-align: center;
+	background: rgba(120,140,120,0.2);
+}
+.Evento_Premios
+{
+	display: block;
+	height: 100px;
+	background: rgba(120,100,120,0.2);
+	width: 100%;
+  overflow: auto;
+}
+
+
+.Evento_Premios table
+{
+	background: rgba(20,100,120,0.2);
+	width: 100%;
+	height: auto;
+	margin-top: 10px;
+	font-size: 12px;
+}
+
+.Evento_Premios table tr td
+{
+	background: rgba(20,100,120,0.2);
+	width: 50px;
+	height: 70px;
+}
+

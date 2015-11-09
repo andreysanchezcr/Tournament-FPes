@@ -1,0 +1,225 @@
+*
+{padding: 0px; margin: 0px;}
+a{text-decoration:none;}
+body
+{
+        background-image: url('../img/cancha.jpg');
+        background-size: 130% auto;
+        background-attachment: fixed;
+        background-position: 0 -167px ;
+
+    	background-repeat: no-repeat;
+
+}
+
+
+
+
+.MenuPrincipal_Jugadores
+{
+	width: 800px;
+	padding: 0px;
+	margin: 0px auto;
+	display: table;
+	list-style: none;
+	background: rgba(200,180,200,0.3);
+}
+	.MenuPrincipal_Jugadores > li
+	{
+		display: table-cell;
+		text-align: center;
+		padding-top: 5px;
+	}
+
+.Hidy_Class
+{
+	display: none;
+
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+
+#Go_Name_Search
+{
+	border-radius: 0px 0px 0px 0px;
+	background: transparent;
+	border: transparent;
+	border-left: 3px solid;
+}
+
+#Busqueda_Avansada
+{
+	width: 800px;
+	opacity: 1;
+	margin: 0px auto;
+	margin-bottom: 20px;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+.select_filtro_Jugador
+{
+	width: 200px;
+	background: rgba(100,120,140,0.3);
+	color: black;
+	border: transparent;
+	display: block;
+
+}
+
+
+
+.select-label
+{
+  display: block;
+  font-size: 12px;
+  top: -25px;
+  transform: translateY(0px);
+  color: #000;
+  text-align: center;
+
+}
+
+#Hacer_Busqueda_Ava
+{
+	border-radius: 0px 0px 0px 0px;
+	border: rgba(200,100,200,0.3);
+	border-left: 3px solid;
+	width: 180px;
+
+}
+.PlayersBox
+{
+  width: 800px;
+  margin: 20px auto;
+}
+.Player
+{
+  width: 190px;
+  height: 250px;
+  position: relative;
+  background: green;
+  padding-top: 25px;
+  text-align: center;
+  color: white;
+  display: inline-block;
+  margin: 5px;
+}
+.Jugador_Camiseta
+{
+  position: absolute;
+  width: 50px;
+  height: 35px;
+  background: tomato;
+  top:0px;
+  padding-top: 15px;
+  border-radius: 0px 0px 20px 0px; 
+}
+.Jugador_Foto_Box
+{
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: red;
+  margin-left:50px;
+  overflow:hidden;
+}
+.Jugador_Nombre
+{
+  font-size: 22px;
+  border:transparent;
+  border-bottom: 3px solid;
+  border-style: dashed;
+  padding: 5px 0px 10px 0px;
+}
+.Jugador_Pais
+{
+  font-size: 16px;
+
+  padding: 5px 0px 10px 0px;
+}
+.Jugador_Posicion
+{
+  font-size: 18px;
+  border:transparent;
+  border-bottom: 3px solid;
+  border-style: dashed;
+  padding: 5px 0px 10px 0px;
+}
+
+
+
+
+.NewBox
+{
+  width:800px;
+  height:200px;
+  background:red;
+  margin: 20px auto; 
+}
+.cajafoto
+{
+   width:250px;
+   height:200px;
+   float:left;
+  margin-left: 30px;
+}
+.cajainputs
+{
+  float:left;
+  width:250px;
+}
+.etiqueta
+{
+  width:200px;
+}
+.foto
+{
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  background:white;
+  margin: 20px 0 10px 70px;
+}
+.cajabotones
+{
+  padding: 50px;
+}
+.booton
+{
+  width:220px;
+}
+.select
+{
+  width:230px;
+}
+
+
+.E_Jugador_Camiseta
+{
+  width: 20px;
+  position: absolute;
+  top:0px;
+  left:0px;
+}
+.E_Jugador_Nombre
+{
+  width: 180px;
+}
+.E_Jugador_Pais
+{
+  width: 180px;
+}
+
+.hiddy
+{
+	display:none;
+}
+

@@ -1,0 +1,131 @@
+
+
+.caja_Estadios
+{
+  margin: 0px auto;
+  width: 1200px;
+  background: url(http://montesanovillas.com/imagenes/galeria/a5bc486e.jpg) no-repeat;  
+}
+.DisplayEstadios
+{
+  width: 900px;
+  height:500px;
+  float: left;
+  position:relative;
+}
+.NavegadorEstadios
+{
+  width: 300px;
+  height:500px;
+  float: left;
+  overflow:hidden;
+}
+#sercher
+{
+  width: 290px;
+  height:30px;
+  background: rgba(16,63,67,0.7);
+  color: white;
+  font-size: 25px;
+  padding:5px;
+  text-align: center;
+  overflow: hidden;
+  display: block;
+  -webkit-transition: all 0.3s ease;
+-moz-transition: all 0.3s ease;
+-ms-transition: all 0.3s ease;
+-o-transition: all 0.3s ease;
+transition: all 0.3s ease;
+}
+#sercher:hover
+{
+  height:500px;
+  -webkit-transition: all 0.3s ease;
+-moz-transition: all 0.3s ease;
+-ms-transition: all 0.3s ease;
+-o-transition: all 0.3s ease;
+transition: all 0.3s ease;
+}
+.select-label
+  {
+    font-size: 16px;
+    display:inline-block;
+    width: 100px;
+}
+.select_filtro_estadio
+{
+  display: inline-block;
+  width: 180px;
+}
+#Nombre_Filtro
+{
+  width: 170px;
+  display: inline-block;
+}
+#Go_Stadium_Search
+{
+    width: 100%;
+    font-size:18px;
+    margin-top:10px;
+}
+.subStadiumBox
+{
+  height: 470px;
+  overflow:auto;
+}
+.subStadium
+{
+  margin-bottom: 20px;
+  height: 100px;
+  display: block;
+  margin-top: 20px;
+  position: relative;
+  background: blue;
+}
+.subNameStm
+{
+  position: absolute;
+  bottom: 0px;
+  width:100%;
+  text-align: right;
+  background: rgba(16,63,67,0.7);
+  color: white;
+  
+}
+.resizesable
+{
+  width: 100%;  
+  height:100%;
+}
+
+
+
+
+
+
+
+
+.caja_Estadio_Info
+{
+  width: 300px;
+  height:500px;
+  background: rgba(2,30,54,0.7);
+  position: absolute;
+  top: 0px;
+  right:0px;
+  color: white;
+}
+.caja_Nombre_Estadio
+{
+  height: 200px; 
+  overflow: hidden;
+  text-align: center;  
+}
+.caja_Descripcion
+{
+  overflow: auto;
+  height: 300px;
+  text-align: center;
+}
+
+

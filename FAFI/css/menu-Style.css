@@ -1,0 +1,124 @@
+
+li:hover a {
+  top: -20px;
+  color: #4eacff;
+  background-color: rgba(200, 200, 200, 0.5);
+  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.5);
+}
+
+li a:after {
+  display: table-cell;
+  color: #4eacff;
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 42%;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 5px 5px 0 5px;
+}
+
+
+
+.menu
+{
+  height: 60px;
+  width: 100%;
+  background-color: rgba(0,31,53,0.5);
+  padding: 0.25em;
+  overflow: hidden;  
+-webkit-transition: all 0.3s ease;
+-moz-transition: all 0.3s ease;
+-ms-transition: all 0.3s ease;
+-o-transition: all 0.3s ease;
+transition: all 0.3s ease;
+}
+
+.menu-fixed
+{
+  position: fixed;
+  z-index: 1000;
+  top: 0px;
+  overflow: hidden; 
+-webkit-transition: all 0.3s ease;
+-moz-transition: all 0.3s ease;
+-ms-transition: all 0.3s ease;
+-o-transition: all 0.3s ease;
+transition: all 0.3s ease;
+}
+
+
+#Menu-Perfil ul
+{
+  list-style: none;
+
+}
+#Menu-Perfil > ul
+{
+  display: table;
+  width: 100%;
+  background: #012;
+  position: relative;
+}
+#Menu-Perfil > ul li
+{
+  display: table-cell;
+  border-right: 1px solid rgba(200, 200, 255, 0.5);
+  border-left: 1px solid rgba(40, 40, 40, 0.2);
+}
+#Menu-Perfil > ul li a
+{
+  text-align: center;
+  font-family: georgia;
+  font-style: italic;
+  text-transform: capitalize;
+  font-size: 1em;
+  color: #fff;
+  display: block;
+  line-height: 20px;
+  padding: 20px;
+  position: relative;
+  transition: all .4s;
+}
+
+#Menu-Perfil > ul li a:after 
+{
+  display: table-cell;
+  color: #4eacff;
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 42%;
+  border-style: solid;
+  border-color: transparent;
+  border-width: 5px 5px 0 5px;
+}
+/*palomita*/
+#Menu-Perfil > ul  li:hover a:after {
+  border-color: white transparent transparent transparent;
+}
+/*
+a {
+  display: block;
+  padding: 10px 13px;
+  font-size: 26px;
+  text-decoration: none;
+  border-radius: 5px;
+  position: relative;
+  top: 0;
+  color: #FFF;
+
+}*/
+
+
+
+.selected {
+  top: -20px;
+  color: #4eacff;
+  background-color: #fff;
+  box-shadow: 0 0 5px 0 rgba(255, 255, 255, 0.7);
+}
+
+.selected:after {
+  border-color: white transparent transparent transparent;
+}
