@@ -1,6 +1,7 @@
 <?php 
   include 'js/EstadioJS.php';
-  include 'html/menuPrincipal.php';
+  include ("conexion.php");
+  $conn = OCILogon($user, $pass, $db);
 ?>
 
 
@@ -84,32 +85,59 @@
   </div>
 
 
+<?php 
 
-    <div id ="subStadiumBox"class="subStadiumBox">
-    <a href="#" onclick="set_Stadium_Grand(this.id)" id="DOnut&&13000&&nevercity&&un un es tadirigillo">
-      <div class="subStadium">
-        <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
-        <div class="subNameStm">Donut Stadium</div>  
+
+  if(isset($_GET["Nb"])){
+    $costa=$_GET["ip"];
+    $ciudad=$_GET["ci"];
+    $m=$_GET["Nb"];
+
+
+
+  }else{
+    $costa=null;
+    $ciudad=null;
+    $m=null;
+
+  }
+
+
+    $outrefc = ocinewcursor($conn); //Declare cursor variable
+
+  $mycursor = ociparse ($conn, "begin filtroEstadios(:curs,'$costa','$ciudad','$m'); end;"); // prepare procedure call
+  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+  $ret = ociexecute($mycursor); // Execute function
+  $ret = ociexecute($outrefc); // Execute cursor
+  $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
+  ocifreestatement($mycursor); // close procedure call
+  ocifreestatement($outrefc); // close cursor
+ // var_dump($data);
+
+  echo " <div id ='subStadiumBox'class='subStadiumBox'>";
+
+  for($p=0;$p<count($data["ID_STADIUM"]);$p++){
+        $nombre=$data["NAME_STADIUM"][$p];
+        $capacidad=$data["CAPASITY"][$p];
+        $ciudad=$data["NAME_CITY"][$p];
+        $descrip=$data["DESCRIPTION"][$p];
+        echo "<a href='#'' onclick='set_Stadium_Grand(this.id)'' id='$nombre&&$capacidad&&$ciudad&&$descrip'>
+      <div class='subStadium'>
+        <img class ='resizesable' src  = 'http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg'/>
+        <div class='subNameStm'>$nombre</div>  
       </div>
-    </a>
-    <a onclick="set_Stadium_Grand(this.id)" id="DINADOME&&47000&&Dinadome Ranch&&un un es tadirigillo">
-      <div class="subStadium">
-        <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
-        <div class="subNameStm">Donut Stadium</div>  
-      </div>
-    </a>
-    <a href="#" onclick="">
-      <div class="subStadium">
-        <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
-        <div class="subNameStm">Donut Stadium</div>  
-      </div>
-    </a>
-    <a href="#" onclick="">
-      <div class="subStadium">
-        <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
-        <div class="subNameStm">Donut Stadium</div>  
-      </div>
-    </a>
+    </a> ";
+  }
+
+
+
+?>
+
+
+
+
+   
+    
     </div>
 </div>
   </div>

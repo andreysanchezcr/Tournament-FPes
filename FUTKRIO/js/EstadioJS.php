@@ -1,31 +1,31 @@
 
 <script type="text/javascript"> 
-			
-			function add_Stadium_search(idi,nombre,capacidad,ciudad,descripcion)
-			{ 
+      
+      function add_Stadium_search(idi,nombre,capacidad,ciudad,descripcion)
+      { 
         
-			 var estadium_item =''+
+       var estadium_item =''+
              '<a href="#" onclick="set_Stadium_Grand(this.id)" id="'+nombre+'&&'+capacidad+'&&'+ciudad+'&&'+descripcion+'"><div class="subStadium"><img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/><div class="subNameStm">'+nombre+'</div>  </div></a>';
-			
+      
       var Box=document.getElementById("subStadiumBox");
       var oldHTML=Box.innerHTML;
       Box.innerHTML=oldHTML+estadium_item;
       }
 </script>
 <script type="text/javascript"> 
-			
+      
       function set_Stadium_Grand(arrray)
-			{
+      {
          
         arrray = arrray.split("&&");
 document.getElementById("nombreEstadio").innerHTML=arrray[0];document.getElementById("capacidadEstadio").innerHTML='Capacidad: '+arrray[1]+' personas';document.getElementById("cityEstadio").innerHTML=arrray[2];   document.getElementById("descripcion").innerHTML=arrray[3];
-			}
+      }
 </script>
 
 
 <script type="text/javascript">
 function fill_Selecters(nations,cities)
-{	
+{ 
   nations = nations.split("$$");
   cities  = cities.split("$$");
   var NationsS = document.getElementById("E_Pais");
@@ -44,28 +44,31 @@ function fill_Selecters(nations,cities)
       CitiesS2.innerHTML = CitiesS2.innerHTML+ '<option value="'+cities[j]+'">'+cities[j]+'</option>';
     }  
   
-}				    					    		
+}                             
 
 </script>
 
 
 <script type="text/javascript"> 
-			
+      
 function get_Busqueda()
-			{
+      {
         var noombre = document.getElementById("Nombre_Filtro").value;
         var paais = document.getElementById("Pais_Filtro").value;
         var ciuudad = document.getElementById("Ciudad_Filtro").value;
-        return(noombre+'$$'+paais+'$'+ciuudad);
+
+        window.location='Estadio.php?Nb='+noombre+'&ip='+paais+'&ci='+ciuudad;
+    //    alert("entro");
+
        }
 </script>
 
 
 
 
-<script type="text/javascript"> 			
+<script type="text/javascript">       
 function new_Stadium()
-			{
+      {
         var noombre = document.getElementById("E_Nombre").value;
         var capacidad = document.getElementById("E_Capacidad").value;
         var paais = document.getElementById("E_Pais").value;
@@ -78,9 +81,9 @@ function new_Stadium()
 
 
 <script type="text/javascript"> 
-			
+      
       function new_box_show()
-			{
+      {
         if(document.getElementById('EditerBox').className=='hiddy')
         {
           document.getElementById('EditerBox').className='';
@@ -122,24 +125,24 @@ function anadir_ciudad(pais,ciudad)
     }
 }
 function elegirPais(){
-				var select = document.getElementById('E_Ciudad');
-				var pais = document.getElementById('E_Pais');
-				var seleccion = pais.options[pais.selectedIndex].value;
-				while(select.selectedIndex != -1){
-					select.remove(select.selectedIndex);
-				}
-				for(i=0;i<cantPaises;i++){
-					if(paises[i][0] == seleccion){
-						var select2 = document.getElementById('E_Ciudad');
-						for(k=0;k<paises[i][1];k++){
-							var option = document.createElement('option');
-							option.text = paises[i][k+2];
-							option.value = paises[i][k+2];
-							select2.add(option);
-						}
-						i=cantPaises;
-					}
-				}
-			}
+        var select = document.getElementById('E_Ciudad');
+        var pais = document.getElementById('E_Pais');
+        var seleccion = pais.options[pais.selectedIndex].value;
+        while(select.selectedIndex != -1){
+          select.remove(select.selectedIndex);
+        }
+        for(i=0;i<cantPaises;i++){
+          if(paises[i][0] == seleccion){
+            var select2 = document.getElementById('E_Ciudad');
+            for(k=0;k<paises[i][1];k++){
+              var option = document.createElement('option');
+              option.text = paises[i][k+2];
+              option.value = paises[i][k+2];
+              select2.add(option);
+            }
+            i=cantPaises;
+          }
+        }
+      }
 
 </script>

@@ -44,3 +44,19 @@ begin
         RAISE;
 END get_paises_nombre;
 
+CREATE OR REPLACE PROCEDURE filtroEstadios(p_recordset out sys_refcursor, pais in varchar2, ciudadd in varchar2, nombre in varchar2) as
+begin
+  open p_recordset for
+
+  select description,id_stadium,name_stadium,capasity,name_city,name_country from (select * from (Select description,id_stadium,name_stadium,capasity,photo,fk_city_id from Stadium )
+
+   A full outer join (select city.id_city,city.name_city, city.fk_country_id from city) B on  A.FK_CITY_ID=B.ID_CITY   ) full outer join country
+ on  fk_country_id=country.id_country where (pais=name_country or pais is null or pais='') and (name_stadium like nombre || '%' or nombre is null or nombre='')  and (name_city=ciudadd or ciudadd is null or ciudadd='');-- and (name_stadium like nombre || '%');
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END filtroEstadios;
+
+
