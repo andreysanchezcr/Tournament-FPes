@@ -1,7 +1,7 @@
 <?php ?>
 	<head>
 		<meta charset = "utf-8"/>
-		<meta description ="Love Ink una pagina web que no robara tu informacion para conquistar el mundo">
+		<meta description =" Lukrio Tournement Viewer una pagina de ftball y nachos">
 
 		<link  rel="stylesheet" type="text/css" href="css/menu-Style.css"/>
         <link  rel="stylesheet" type="text/css" href="fonts/css/font-awesome.min.css"/>
