@@ -1,0 +1,31 @@
+ALTER TABLE PLAYER
+DROP COLUMN Fk_Team_Id;
+
+-------------------------------------------------------------------------
+
+CREATE TABLE Player_X_Team
+(
+       --ForeingKey
+       fk_player_id  NUMBER(6) NOT NULL,
+       fk_team_id    NUMBER(6) NOT NULL,
+       --Campos de Auditoria
+       fec_creacion    DATE, 
+       creado_por      VARCHAR2(10),
+       fec_ultima_mod  DATE,
+       user_ultima_mod VARCHAR2(10)
+);
+--PrimaryKey
+ALTER TABLE Player_X_Team
+      ADD CONSTRAINT pk_player_x_team_id PRIMARY KEY(fk_team_id,fk_player_id)
+      USING INDEX
+      TABLESPACE lu_ind PCTFREE 20
+      STORAGE(INITIAL 10K NEXT 10K PCTINCREASE 0); 
+--ForeingKey
+ALTER TABLE Player_X_Team
+      ADD CONSTRAINT fk_player_x_team_id FOREIGN KEY(fk_player_id)
+      REFERENCES Player(id_player);
+ALTER TABLE Player_X_Team
+      ADD CONSTRAINT fk_team_x_player_id FOREIGN KEY(fk_team_id)
+      REFERENCES Team(id_team);
+--------------------------------------------------------- 
+
