@@ -29,3 +29,13 @@ ALTER TABLE Player_X_Team
       REFERENCES Team(id_team);
 --------------------------------------------------------- 
 
+CREATE OR REPLACE PROCEDURE get_Award_x_Player(idPlayer IN NUMBER,p_recordset out sys_refcursor) as
+begin
+  open p_recordset for
+    select Name_Award FROM Award where Id_Award=IdPlayer;
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Award_x_Player;
