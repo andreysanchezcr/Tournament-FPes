@@ -5,13 +5,7 @@
 $Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
 $Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");
 $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
-
-
 ?>
-
-
-
-
 	<head>
 		<title>Fafi Futball y Nachos</title>
 		<title>Jugadores</title> 
@@ -39,7 +33,7 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	    				<input id="Go_Name_Search" type="submit" onclick="go_Nombre()" value="Go">
   					</div>
 			</li>
-			<li><a href="#"  onclick="Mostrar_Filtros();">Busqueda Avansada </a></li>
+			<li><a href="#"  onclick="Mostrar_Filtros();">Busqueda Avanzada </a></li>
 		</ul>
 		<div id="Busqueda_Avansada" class="Hidy_Class">
 			<table>
