@@ -112,6 +112,10 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	      <div class="etiqueta">NickName<input id="mote" name="nick"></input></div>
 	      <div class="etiqueta">Número de camiseta<input id="camisa" name="numCamiseta"></input></div>
 	      <div class="etiqueta">Nacionalidad<select id="nacion" class="select" name="nacionalidad"></select></div>
+	      <div class="etiqueta">Género<select id="genero" class="select" name="genero">
+	      	<option>Hombre</option>
+	      	<option>Mujer</option>
+	      </select></div>
 	    </div>
 	    <div class="cajabotones">
 	      <input type="submit" class="button" value="Crear Jugador" name="crearJugador"></input>
