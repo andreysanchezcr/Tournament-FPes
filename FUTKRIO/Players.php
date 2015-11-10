@@ -7,12 +7,7 @@ $Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
 $Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");
 $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 
-
 ?>
-
-
-
-
 	<head>
 		<title>Fafi Futball y Nachos</title>
 		<title>Jugadores</title> 
@@ -103,20 +98,25 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 <a href="#" onclick="Hide()">hide</a>
 <div id="newBox" class="NewBox">
   <div>
-    <div class="cajafoto">
-      <div class="foto">.</div>
-      <input></input>
-      <input type="file" value="Cargar foto"></input>
-    </div>
-    <div class="cajainputs">
-      <div class="etiqueta">nombre<input id ="noombre"></input></div>
-      <div class="etiqueta">nick<input id="mote"></input></div>
-      <div  class="etiqueta">camiseta<input id="camisa"></input></div>
-      <div  class="etiqueta">nacionalidad<select  id="nacion" class="select"></select></div>
-    </div>
-    <div class="cajabotones">
-      <input type="button" class="button" value="Crear Jugador"></input>
-    </div>
+  	<form action='registrarJugador.php' method='POST'>
+	    <div class="cajafoto">
+	      <div class="foto">
+	      	<img src="" id="imagenNueva" class="resizesable">
+	      </div>
+	      <input type="file" id="upload" name="upload">
+	      <a href="" onclick="changePicture(); return false">Cargar Imagen</a>
+	    </div>
+	    <div class="cajainputs">
+	      <div class="etiqueta">Nombre<input id ="noombre" name="nombre"></input></div>
+	      <div class="etiqueta">Apellido<input id ="apellidoo" name="apellido"></input></div>
+	      <div class="etiqueta">NickName<input id="mote" name="nick"></input></div>
+	      <div class="etiqueta">Número de camiseta<input id="camisa" name="numCamiseta"></input></div>
+	      <div class="etiqueta">Nacionalidad<select id="nacion" class="select" name="nacionalidad"></select></div>
+	    </div>
+	    <div class="cajabotones">
+	      <input type="submit" class="button" value="Crear Jugador" name="crearJugador"></input>
+	    </div>
+	</form>
   </div>
 </div>
 <div id ="PlayersBox" class="PlayersBox">
@@ -124,6 +124,15 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
     
   </div>
 </div>
+
+<script>
+    function changePicture() {
+        var link = document.getElementById('upload').value;
+        document.getElementById("imagenNueva").src = link;
+    }
+</script>
+
+
 
 
 
