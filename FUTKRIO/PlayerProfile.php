@@ -1,5 +1,5 @@
 <?php  
-	include 'js/PlayerProfileJS.php';
+
 	include 'html/menuPrincipal.php';
 /*Variables*/
 include ("conexion.php");
