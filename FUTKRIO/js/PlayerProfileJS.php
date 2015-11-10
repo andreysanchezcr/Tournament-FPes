@@ -17,13 +17,12 @@
           '<h4>Nacionalidad: '+nacionalidad+'</h4>'+
           
         '</div>'+
-        '<div class="caja_Premios">'+
-          '<div class="premios_titulo">Premios Ganados</div>'+
-          '<div class="award">Guantes Dorados</div>'+
-          '<div class="award">Guantes Doradisimos</div>'+
-          '<div class="award">Guantes De Oro</div>'+
-         ' <div class="award">Guantes De Doritos</div>'+
-       ' </div>'+
+        '<div class="caja_Premios"><div class="premios_titulo">Premios Ganados</div>'+;
+        premios=premios.split("$$");
+        for(var i=0;i<premios.lenght;i++){  
+          card_html+='<div class="award">'+premios[i]+'</div>'+
+        }
+       card_html+=' </div>'+
       '</div>'+
     '</div> ';
 Caja_Jugadores.innerHTML= card_html;
