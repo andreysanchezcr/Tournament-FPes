@@ -1,7 +1,8 @@
 DROP PROCEDURE get_all_players;
 DROP PROCEDURE get_allplayers;
 
-
+ALTER TABLE Stadium
+ ADD DESCRIPTION VArCHAR2(80);
 
 CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
 begin

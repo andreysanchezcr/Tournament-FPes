@@ -85,7 +85,7 @@
   </div>
 
 
-<?php 
+<?php
 
 
   if(isset($_GET["Nb"])){
