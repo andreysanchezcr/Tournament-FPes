@@ -1,6 +1,7 @@
 <?php  
 	include 'js/php_jscrips.php';
 	include 'js/PlayersJS.php';
+    include 'html/menuPrincipal.php';
 /*Variables*/
 $Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
 $Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");

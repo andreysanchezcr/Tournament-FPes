@@ -1,5 +1,7 @@
 <?php  
 	include 'js/TeamJS.php';
+  include 'html/menuPrincipal.php';
+
 ?>
 
   <head>
@@ -16,24 +18,9 @@
 
 
 
-
-
-
-
-<link rel="stylesheet" type="text/css" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/sunny/jquery-ui.css" />
-<script src="//code.jquery.com/jquery-latest.min.js"></script>
-<!-- script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script -->
-<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
-
-
-
-
   </head>
 
 <body>
-<form>
-Datum eingeben: <input type="text" name="dateInput" id="datePicker" />
-</form>
 
 	<a href ="#" onclick="add_Player('Navas Keylor','13')">AddPlayer</a>
 <a href ="#" onclick="add_Premios('STARDUST TOURNEMENT')">AddPREMIOS</a>
@@ -61,10 +48,3 @@ Datum eingeben: <input type="text" name="dateInput" id="datePicker" />
 </body>
 
 
-<?php
-$fechaInicio=strtotime("25-02-2008");
-$fechaFin=strtotime("01-04-2008");
-for($i=$fechaInicio; $i<=$fechaFin; $i+=86400){
-    echo date("d-m-Y", $i)."<br>";
-}
-?>
