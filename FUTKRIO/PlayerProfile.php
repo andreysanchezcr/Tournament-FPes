@@ -4,11 +4,11 @@
 /*Variables*/
 include ("conexion.php");
 $conn = OCILogon($user, $pass, $db);
-$outrefc = ocinewcursor($conn); //Declare cursor variable
 
 $idPlayer=$_GET['id'];
 
-$mycursor = ociparse ($conn, "begin get_Player(:curs,'$idPlayer'); end;"); // prepare procedure call
+$outrefc = ocinewcursor($conn); //Declare cursor variable
+$mycursor = ociparse ($conn, "begin GET_PLAYER(:curs,'$idPlayer'); end;"); // prepare procedure call
 ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
 $ret = ociexecute($mycursor); // Execute function
 $ret = ociexecute($outrefc); // Execute cursor
@@ -26,6 +26,7 @@ for($i;$i<count($data['ID_PLAYER']);$i++){
 }
 $premios="";
 
+$outrefc = ocinewcursor($conn); //Declare cursor variable
 $mycursor = ociparse ($conn, "begin get_Award_x_Player('$idPlayer',:curs); end;"); // prepare procedure call
 ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
 $ret = ociexecute($mycursor); // Execute function
@@ -35,7 +36,7 @@ ocifreestatement($mycursor); // close procedure call
 ocifreestatement($outrefc); // close cursor
 
 for($i;$i<count($data['NAME_AWARD']);$i++){
-	if($i<count($data['NAME_AWARD']-1){
+	if($i<count($data['NAME_AWARD']-1)){
 		$premios=$premios.$data['NAME_AWARD'][$i]-"$$";
 	}else{
 		$premios=$premios.$data['NAME_AWARD'][$i];

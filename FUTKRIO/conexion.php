@@ -1,5 +1,5 @@
 <?php
-	$user = 'Le';
-	$pass = 'le';
+	$user = 'lu';
+	$pass = 'lu';
 	$db = 'dbprueba';
 ?>

@@ -57,3 +57,19 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END get_Player;
+
+---------------------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE insert_player(pName IN VARCHAR2,pLast IN VARCHAR2,pNick IN VARCHAR2,pShirt IN NUMBER
+                        ,pPhoto IN BLOB, pCountry IN NUMBER, pGenre IN NUMBER) as
+begin
+  insert into Player(Id_Player,First_Name,Last_Name,Nickname,t_Shirt_Num,Photo,Fk_Country_Id,Genre)
+  VALUES(SEQ_PLAYER.Nextval,pName,pLast,pNick,pShirt,pPhoto,pCountry,pGenre);
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END insert_player;
+
+-------------------------------------------------------------------------------
