@@ -19,11 +19,44 @@
 
 
 
-<a href="#" onclick="add_Stadium_search('COLOSUS','12000000','COLISEA','un estadio colosal')">add estadium</a>
+<a href="#" onclick="add_Stadium_search('idi','COLOSUS','12000000','COLISEA','un estadio colosal')">add estadium</a>
+<a href="#" onclick="anadir_pais('hola')">pais1</a>
+<a href="#" onclick="anadir_pais('adios')">pais2</a>
+<a href="#" onclick="anadir_ciudad('hola','hola1')">ciudad1</a>
+<a href="#" onclick="anadir_ciudad('adios','hola2')">ciudad2</a>
+
+
 <div class = "caja_Estadios">
   <div class ="DisplayEstadios">
+  
+    
   <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
     <div class ="caja_Estadio_Info">
+      <div class="editar showy"><a href="#" onclick="new_box_show()">Edit/New</a></div>
+      <!--///////////////////////////-->
+      
+      <div id="EditerBox" class="hiddy">l
+        <div class="select-label">Nombre</div>
+        <input id="E_Nombre"></input>
+        <div class="select-label">Capacidad</div>
+        <input id="E_Capacidad"></input>
+                  <div class="select-label">Pais</div>
+                  <select onclick="elegirPais()" id="E_Pais" class="select_filtro_estadio">       
+          
+                    </select>
+        <div class="select-label">Ciudad</div>
+                  <select id="E_Ciudad" class="select_filtro_estadio" >               
+                         </select>
+        <input type="button" value ="Cargar Foto"></input>
+        <input id="Nombre_Filotro"></input>
+        <div class="select-label">Descripcion</div>
+        <textarea id="E_Descripcion"rows="10" cols="41">
+        </textarea>
+        <input type="button" value ="Crear Estadio" onclick="new_Stadium()"></input>
+
+</div>
+      
+      <!--///////////////////////////-->
       <div class = "caja_Nombre_Estadio">
           <h1 id="nombreEstadio">Donut Stadium</h1>
           <h4 id="capacidadEstadio">capacidad: 13 000 personas</h3>
@@ -39,18 +72,13 @@
     <div id="sercher">BUSCAR </br>
       <div class="select-label">Nombre</div>
       <input id="Nombre_Filtro"></input>
-				    	  <div class="select-label">Pais</div>
-				    	  <select id="Pais_Filtro" class="select_filtro_estadio">    		
-							        <option value="A">Ambos</option>
-
-						      </select>
+                <div class="select-label">Pais</div>
+                <select id="Pais_Filtro" class="select_filtro_estadio">     
+                  </select>
       <div class="select-label">Ciudad</div>
-				    	  <select id="Genero_Filtro" class="select_filtro_estadio" >				    		
-							        <option value="A">Ambos</option>
-							        <option value="H">Hombre</option>
-							        <option value="M">Mujer</option>
-						      </select>
-      <input id="Go_Stadium_Search" type="submit" value="Buscar"></input>   
+                <select id="Ciudad_Filtro" class="select_filtro_estadio" >                
+                    </select>
+      <input id="Go_Stadium_Search" type="submit" onclick="get_Busqueda()" value="Buscar"></input>   
       <img class="resizesable" src= "http://www.bloguismo.com/wp-content/uploads/2012/10/Efecto-Lupa.jpg"/>
   </div>
 
@@ -84,4 +112,18 @@
     </div>
 </div>
   </div>
+<!--  
+<div class = "Estadio_Carta" >
+    <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
+    <div class ="caja_Estadio_Info">
+      <div class = "caja_Nombre_Estadio">
+          <h1>Donut Stadium</h1>
+          <h4>capacidad: 13 000 personas</h3>
+          <h3>never land city</h3>
+      </div>
+      <div class = "caja_Descripcion">
+        Un estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigillo
+      </div>
+    </div>
+  </div> -->
 </div>
