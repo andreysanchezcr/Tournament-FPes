@@ -1,5 +1,6 @@
 <?php 
   include 'js/EstadioJS.php';
+  include 'html/menuPrincipal.php';
 ?>
 
 

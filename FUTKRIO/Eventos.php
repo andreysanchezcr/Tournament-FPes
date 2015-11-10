@@ -1,5 +1,6 @@
 <?php
 include 'js/Eventos_PHP_JS.php';
+include 'html/menuPrincipal.php';
 $array_premios = array("Balon Oro", "$1000", "Un Barriton","Una Chica");
 $mov_str = implode(",", $array_premios);
 //$id=$_GET["id"];
