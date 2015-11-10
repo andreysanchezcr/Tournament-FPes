@@ -18,7 +18,10 @@
       {
          
         arrray = arrray.split("&&");
-document.getElementById("nombreEstadio").innerHTML=arrray[0];document.getElementById("capacidadEstadio").innerHTML='Capacidad: '+arrray[1]+' personas';document.getElementById("cityEstadio").innerHTML=arrray[2];   document.getElementById("descripcion").innerHTML=arrray[3];
+document.getElementById("nombreEstadio").innerHTML=arrray[0];
+document.getElementById("capacidadEstadio").innerHTML='Capacidad: '+arrray[1]+' personas';
+document.getElementById("cityEstadio").innerHTML=arrray[2];   
+document.getElementById("descripcion").innerHTML=arrray[3];
       }
 </script>
 
@@ -42,8 +45,7 @@ function fill_Selecters(nations,cities)
     {
       CitiesS.innerHTML = CitiesS.innerHTML+ '<option value="'+cities[j]+'">'+cities[j]+'</option>';
       CitiesS2.innerHTML = CitiesS2.innerHTML+ '<option value="'+cities[j]+'">'+cities[j]+'</option>';
-    }  
-  
+    }    
 }                             
 
 </script>
@@ -78,6 +80,20 @@ function new_Stadium()
         alert(noombre+'$$'+capacidad+'$$'+paais+'$$'+ciuudad+'$$'+descripcion);
        }
 </script>
+<script type="text/javascript">       
+function edit_Stadium()
+      {
+        //var noombre = document.getElementById("E_Nombre").value;
+        //var capacidad = document.getElementById("E_Capacidad").value;
+        //var paais = document.getElementById("E_Pais").value;
+        //var ciuudad = document.getElementById("E_Ciudad").value;
+        //var descripcion = document.getElementById("E_Descripcion").value;
+        
+        alert("edicion terminada"/*noombre+'$$'+capacidad+'$$'+paais+'$$'+ciuudad+'$$'+descripcion*/);
+       }
+</script>
+
+
 
 
 <script type="text/javascript"> 
@@ -87,6 +103,14 @@ function new_Stadium()
         if(document.getElementById('EditerBox').className=='hiddy')
         {
           document.getElementById('EditerBox').className='';
+
+          document.getElementById("E_Nombre").value='';
+          document.getElementById("E_Capacidad").value='';
+         // document.getElementById("E_Nombre").value=document.getElementById("cityEstadio").innerHTML;   
+          document.getElementById("E_Descripcion").value='';
+          document.getElementById("botonNewEdit").setAttribute('onclick', 'new_Stadium();');  //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6
+          document.getElementById("botonNewEdit").setAttribute('value', 'Crear Estadio');
+          
         }
         else
         {
@@ -145,4 +169,34 @@ function elegirPais(){
         }
       }
 
+</script>
+
+
+
+<script type="text/javascript"> 
+      
+function edit_box_show()
+      {
+        if(document.getElementById('EditerBox').className=='hiddy')
+        {
+          document.getElementById('EditerBox').className='';
+          
+          document.getElementById("E_Nombre").value=document.getElementById("nombreEstadio").innerHTML;
+          document.getElementById("E_Capacidad").value=document.getElementById("capacidadEstadio").innerHTML;
+         // document.getElementById("E_Nombre").value=document.getElementById("cityEstadio").innerHTML;   
+          document.getElementById("E_Descripcion").value=document.getElementById("descripcion").innerHTML;
+
+          document.getElementById("botonNewEdit").setAttribute('onclick', 'edit_Stadium();');  //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6
+          document.getElementById("botonNewEdit").setAttribute('value', 'Terminar Edición');
+          var ciiudad = document.getElementById("cityEstadio").innerHTML;
+         
+          
+
+        }
+        else
+        {
+          document.getElementById('EditerBox').className+='hiddy';
+        }
+         
+      }
 </script>

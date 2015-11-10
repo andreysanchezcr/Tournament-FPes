@@ -134,16 +134,27 @@ transition: all 0.3s ease;
 
 
 
+.new
+{
+  display:none;
+  position: absolute;
+  color:white;
+  background:green;
+  border-radius: 0 0 10px 0;
+  left:85px;
+}
+
+
 
 .editar
 {
   display:none;
   position: absolute;
   color:white;
-  background:red;
+  background:green;
   border-radius: 0 0 10px 0;
 }
-.editar a
+.editar a ,.new a
 {
    text-decoration: none;
    color:white;

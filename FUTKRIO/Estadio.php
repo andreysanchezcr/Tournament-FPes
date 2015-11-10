@@ -1,7 +1,7 @@
 <?php 
   include 'js/EstadioJS.php';
   include ("conexion.php");
-  $conn = OCILogon($user, $pass, $db);
+ $conn = OCILogon($user, $pass, $db);
 ?>
 
 
@@ -34,10 +34,11 @@
     
   <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
     <div class ="caja_Estadio_Info">
-      <div class="editar showy"><a href="#" onclick="new_box_show()">Edit/New</a></div>
+      <div class="new showy"><a href="#" onclick="new_box_show()">Nuevo</a></div>
+      <div class="editar showy"><a href="#" onclick="edit_box_show()">Editar</a></div>
       <!--///////////////////////////-->
       
-      <div id="EditerBox" class="hiddy">l
+      <div id="EditerBox" class="hiddy">
         <div class="select-label">Nombre</div>
         <input id="E_Nombre"></input>
         <div class="select-label">Capacidad</div>
@@ -48,13 +49,15 @@
                     </select>
         <div class="select-label">Ciudad</div>
                   <select id="E_Ciudad" class="select_filtro_estadio" >               
-                         </select>
-        <input type="button" value ="Cargar Foto"></input>
-        <input id="Nombre_Filotro"></input>
+                  <option value="one">One</option>
+                  <option value="two">two</option>
+                  </select>
+        <div class="select-label">Foto</div>
+        <input type="file" id="E_foto_estadio"></input>
         <div class="select-label">Descripcion</div>
         <textarea id="E_Descripcion"rows="10" cols="41">
         </textarea>
-        <input type="button" value ="Crear Estadio" onclick="new_Stadium()"></input>
+        <input id="botonNewEdit" type="button" value ="Crear Estadio" onclick="new_Stadium()"></input>
 
 </div>
       
@@ -62,7 +65,7 @@
       <div class = "caja_Nombre_Estadio">
           <h1 id="nombreEstadio">Donut Stadium</h1>
           <h4 id="capacidadEstadio">capacidad: 13 000 personas</h3>
-          <h3 id="cityEstadio">never land city</h3>
+          <h3 id="cityEstadio">two</h3>
       </div>
       <div id="descripcion"class = "caja_Descripcion">
         Un estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigillo
@@ -85,7 +88,7 @@
   </div>
 
 
-<?php
+<?php 
 
 
   if(isset($_GET["Nb"])){
