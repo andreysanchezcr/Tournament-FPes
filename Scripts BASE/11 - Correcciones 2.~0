@@ -63,7 +63,6 @@ END get_Player;
 CREATE OR REPLACE PROCEDURE insert_player(pName IN VARCHAR2,pLast IN VARCHAR2,pNick IN VARCHAR2,pShirt IN NUMBER
                         ,pPhoto IN BLOB, pCountry IN NUMBER, pGenre IN NUMBER) as
 begin
-  open p_recordset for
   insert into Player(Id_Player,First_Name,Last_Name,Nickname,t_Shirt_Num,Photo,Fk_Country_Id,Genre)
   VALUES(SEQ_PLAYER.Nextval,pName,pLast,pNick,pShirt,pPhoto,pCountry,pGenre);
   exception
@@ -72,3 +71,25 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END insert_player;
+
+-------------------------------------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE get_Player(p_recordset out sys_refcursor,id_ in number) as
+begin
+  open p_recordset for
+
+  Select * from (Select id_player,first_name,last_name,nickname,t_shirt_num,photo,fk_country_id as pais from player
+  where id_player=id_) A
+  full outer join (select country.id_country,country.name_country from country) B on A.PAIS=B.ID_COUNTRY ;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Player;
+
+--------------------------------------------------------------------------------
+
+select * from Player;
+/
