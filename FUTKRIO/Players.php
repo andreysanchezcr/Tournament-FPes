@@ -98,13 +98,12 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 <a href="#" onclick="Hide()">hide</a>
 <div id="newBox" class="NewBox">
   <div>
-  	<form action='registrarJugador.php' method='POST'>
+  	<form action='registrarJugador.php' method='POST' enctype="multipart/form-data">
 	    <div class="cajafoto">
 	      <div class="foto">
 	      	<img src="" id="imagenNueva" class="resizesable">
 	      </div>
-	      <input type="file" id="upload" name="upload">
-	      <a href="" onclick="changePicture(); return false">Cargar Imagen</a>
+	      <input type="file" name="imagenNueva">
 	    </div>
 	    <div class="cajainputs">
 	      <div class="etiqueta">Nombre<input id ="noombre" name="nombre"></input></div>
@@ -113,8 +112,8 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	      <div class="etiqueta">Número de camiseta<input id="camisa" name="numCamiseta"></input></div>
 	      <div class="etiqueta">Nacionalidad<select id="nacion" class="select" name="nacionalidad"></select></div>
 	      <div class="etiqueta">Género<select id="genero" class="select" name="genero">
-	      	<option>Hombre</option>
-	      	<option>Mujer</option>
+	      	<option value='h'>Hombre</option>
+	      	<option value='m'>Mujer</option>
 	      </select></div>
 	    </div>
 	    <div class="cajabotones">
@@ -128,18 +127,6 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
     
   </div>
 </div>
-
-<script>
-    function changePicture() {
-        var link = document.getElementById('upload').value;
-        document.getElementById("imagenNueva").src = link;
-    }
-</script>
-
-
-
-
-
 
 </body>
 
