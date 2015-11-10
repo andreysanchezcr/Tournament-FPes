@@ -5,7 +5,13 @@
 $Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
 $Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");
 $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
+
+
 ?>
+
+
+
+
 	<head>
 		<title>Fafi Futball y Nachos</title>
 		<title>Jugadores</title> 
@@ -23,17 +29,34 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	<body>
 	<div class="Contenedor_Jugadores">
 		<ul class="MenuPrincipal_Jugadores">
-			<li><a href="#" onclick="todos_Jugadores()">Todos los jugadores</a></li>
+			<li><a href="#" onclick="todos_Jugadores()" class="MenuItem">Todos  </a></li>
 			<li><a href="#" onclick="destacados_Jugadores()">Destacados</a></li>
 
 			<li class="mat-div">
 				    <div id="Label_Name_Search">
-	    				<label for="first-name" class="mat-label">Nombre o Nick</label>
-	    				<input type="text" class="mat-input" id="nombre_jugador_Menu">
-	    				<input id="Go_Name_Search" type="submit" onclick="go_Nombre()" value="Go">
+	    				<label for="first-name" class="mat-label">Nombre</label>
+	    				<input type="text" class="mat-input" id="nombre_jugador_Menu"></input>
   					</div>
 			</li>
-			<li><a href="#"  onclick="Mostrar_Filtros();">Busqueda Avanzada </a></li>
+
+			<li class="mat-div">
+				    <div id="Label_Name_Search">
+	    				<label for="first-name" class="mat-label">Apellido</label>
+	    				<input type="text" class="mat-input" id="apellido_jugador_Menu"></input>
+  					</div>
+			</li>
+			
+
+			<li class="mat-div">
+				    <div id="Label_Name_Search">
+	    				<label for="first-name" class="mat-label">Nick</label>
+	    				<input type="text" class="mat-input" id="nick_jugador_Menu"></input>
+  					</div>
+			</li>
+
+
+			<li><a href="#"  onclick="Mostrar_Filtros();">Busqueda Avansada </a></li>
+			<li><a href="#"  onclick="go_All();">Buscar</a></li>
 		</ul>
 		<div id="Busqueda_Avansada" class="Hidy_Class">
 			<table>
@@ -54,7 +77,7 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 						</select>
 				    </td>
 				   	<td>
-				   		<div class="select-label">Nacionalidad</div>	 
+				   		<div class="select-label">Pais Origen</div>	 
 						<select id="Nacionalidad_Filtro" class="select_filtro_Jugador" >
 						<!--Catalogo de Equipos&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&66-->
 
@@ -68,8 +91,12 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 			</table>		
 		</div>
 
-<a href="#" onclick="add_Editable_Player('13','Navas Keylor','Navitas','Tico','idi','Tico$$CostaRica$$Sele')">add_editablePlayer</a>
-<a href="#" onclick="add_Player('13','Navas Keylor','Navitas','Tico','idi')">add_Player</a>
+<a href="#" onclick="add_Editable_Player('13','Navas Keylor','Navitas','Tico','idi','Tico$$CostaRica$$Sele')">add_editablePlayer 1</a>
+<a href="#" onclick="add_Editable_Player('13','Juan Keylor','Navitas','Tico','idi','Tico$$CostaRica$$Sele')">add_editablePlayer 2</a>
+
+<a href="#" onclick="add_Player('13','Navas Keylor','Navitas','Tico','idi')">navas</a>
+<a href="#" onclick="add_Player('13','juan Keylor','Navitas','Tico','idi')">juan</a>
+
 <a href="#" onclick="New_Player()">newplayer</a>
 <a href="#" onclick="Set_Nations('Costarricese$$Panemenense$$mexicanense')">fill nations</a>
 <a href="#" onclick="Hide()">hide</a>

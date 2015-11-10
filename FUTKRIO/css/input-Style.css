@@ -11,7 +11,7 @@ body * {
   color: white;
   transition: all 0.5s;
   text-align: left;
-  margin-left: 70px;
+  margin-left: 20px;
 }
 
 
@@ -22,6 +22,7 @@ body * {
   outline: none;
   padding: 8px 0;
   font-size: 16px;
+  width: 100px;
 }
 
 .mat-div {
@@ -56,4 +57,9 @@ body * {
 .is-completed .mat-label {
   font-size: 12px;
   transform: translateY(0);
+}
+
+.MenuItem
+{
+  height: 50px;
 }

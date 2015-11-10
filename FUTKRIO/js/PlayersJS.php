@@ -2,10 +2,10 @@
 
 
 <script type="text/javascript"> 
-	function add_Player(numCamiseta, Nombre, mote, Nacionalidad, id)
-	{
+  function add_Player(numCamiseta, Nombre, mote, Nacionalidad, id)
+  {
         var player_item = ''+
-            '<a href="lugar'+id+'"><div class="Player"><div class="Jugador_Camiseta">'+numCamiseta+'</div><div class="Jugador_Foto_Box">Foto</div><div class="Jugador_Nombre">'+Nombre+'</div><div class="Jugador_Nombre">'+mote+'</div><div class="Jugador_Pais">'+Nacionalidad+'</div></div></a>';
+            '<a href="lugar'+id+'"><div class="Player"><div class="Jugador_Camiseta">'+numCamiseta+'</div><div class="Jugador_Foto_Box">Foto</div><div class="Jugador_Nombre" >'+Nombre+'</div><div class="Jugador_Nombre">'+mote+'</div><div class="Jugador_Pais">'+Nacionalidad+'</div></div></a>';
         var Box=document.getElementById("PlayersBox");
         var old_HTML=Box.innerHTML;
         Box.innerHTML=old_HTML+player_item;
@@ -14,13 +14,13 @@
 
 
 <script type="text/javascript">
-			function add_Editable_Player(numCamiseta, Nombre, mote, Nacionalidad, id,nations)
-			{
+      function add_Editable_Player(numCamiseta, Nombre, mote, Nacionalidad, id,nations)
+      {
         
         nations=nations.split('$$');
         
         var player_item = ''+
-            '<div class="Player"><input class="E_Jugador_Camiseta" value="'+numCamiseta+'"></input><div class="Jugador_Foto_Box">Foto</div><input class="E_Jugador_Nombre" value="'+Nombre+'"><input class="E_Jugador_Nombre" value="'+mote+'"></input><select class="E_Jugador_Pais">';
+            '<div class="Player"><input class="E_Jugador_Camiseta" value="'+numCamiseta+'"></input><div class="Jugador_Foto_Box">Foto</div><input class="E_Jugador_Nombre" placeholder="Nombre" value="'+Nombre+'"><input class="E_Jugador_Nombre" placeholder="Nick name" value="'+mote+'"></input><select class="E_Jugador_Pais">';
         
         for(var i = 0; i<nations.length;i++)
         {    
@@ -30,13 +30,11 @@
           }
           else{player_item=player_item+'<option value="'+nations[i]+'">'+nations[i]+'</option>';}
         }
-        	
           
-        player_item=player_item+'</select><a href="#" onclick="Alter_Player( this )">hola</a></div>';
+          
+        player_item=player_item+'</select><a href="#" onclick="Alter_Player( this )">hola</a><a href="#" onclick="Delete_Player( this )">delete</a>   </div>';
         
-      var Box=document.getElementById("PlayersBox");
-      var old_HTML=Box.innerHTML;
-      Box.innerHTML=old_HTML+player_item;
+      var Box=document.getElementById("PlayersBox").innerHTML+=player_item;
       }
 </script>
 <script type="text/javascript">
@@ -48,6 +46,13 @@ function Alter_Player(el)
   var motte=padre.childNodes[3].value;
   var nacionnalidad=padre.childNodes[4].value; return(camisseta+'$$'+nommbre+'$$'+motte+'$$'+nacionnalidad);
 }
+</script>
+<script type="text/javascript">
+function Delete_Player(el)
+{ 
+  var padre = el.parentNode; 
+  padre.remove();
+  }
 </script>
 
 
@@ -70,7 +75,7 @@ function Set_Nations(arrray)
 { 
     arrray=arrray.split("$$");
     var NationsSelect = document.getElementById("nacion");
-  	for(var i = 0; i < arrray.length;i++)
+    for(var i = 0; i < arrray.length;i++)
     {
       NationsSelect.innerHTML = NationsSelect.innerHTML+ '<option value="'+arrray[i]+'">'+arrray[i]+'</option>';
     }
@@ -80,42 +85,36 @@ function Set_Nations(arrray)
 <script type="text/javascript">
 function Hide(arrray)
 {
-	$("#newBox").addClass("hiddy");
+  $("#newBox").addClass("hiddy");
 }
 </script>
 
 <script type="text/javascript">
 function todos_Jugadores()
 {
-	alert("Todos los jugadores pa aca");
+  alert("Todos los jugadores pa aca");
 }
 </script>
 
 <script type="text/javascript">
 function destacados_Jugadores()
 {
-	alert("Todos los jugadores pa aca solo los que tienen premio claro");
-}
-</script>
-
-
-<script type="text/javascript">
-function go_Nombre()
-{	
-	var valuer = document.getElementById("nombre_jugador_Menu").value;
-	return(valuer);  
+  alert("Todos los jugadores pa aca solo los que tienen premio claro");
 }
 </script>
 
 
 <script type="text/javascript">
 function go_All()
-{	
-	var noombre = document.getElementById("nombre_jugador_Menu").value;
-	var Gen_Filtro = document.getElementById("Genero_Filtro").value;
-	var Equi_Filtro = document.getElementById("Equipo_Filtro").value;
-	var Nacion_Filtro = document.getElementById("Nacionalidad_Filtro").value;
-	alert(noombre+'$$'+Gen_Filtro+'$$'+Equi_Filtro+'$$'+Nacion_Filtro);  
+
+{ 
+  var noombre = document.getElementById("nombre_jugador_Menu").value;
+  var appellido = document.getElementById("apellido_jugador_Menu").value;
+  var niick = document.getElementById("nick_jugador_Menu").value;
+  var Gen_Filtro = document.getElementById("Genero_Filtro").value;
+  var Equi_Filtro = document.getElementById("Equipo_Filtro").value;
+  var Nacion_Filtro = document.getElementById("Nacionalidad_Filtro").value;
+  alert(noombre+'$$'+appellido+'$$'+niick+'$$'+Gen_Filtro+'$$'+Equi_Filtro+'$$'+Nacion_Filtro);  
 }
 </script>
 
