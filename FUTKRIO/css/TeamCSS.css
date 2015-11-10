@@ -11,7 +11,6 @@ body
       background-repeat: no-repeat;
 
 }
-
 .TeamBox
 {
   color: white;
@@ -35,9 +34,9 @@ body
   float: left;
   height:130px;
   padding-top: 30px;
-	font-family: 'Source Sans Pro', sans-serif;
-	font-weight: 900;
-	text-transform: uppercase;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
   font-size:50px;
 }
 .Team_Flag
@@ -111,5 +110,23 @@ transition: all 0.3s ease;
 {
  border-bottom: 4px solid #8dd; 
 padding: 10px;
-  background: rgba(6,141,157,0.7);
+}
+
+
+.Editor
+{
+  color: white;
+  width: 800px;
+  margin: 20px auto;
+}
+.newTeamButton,.EditTeamButton ,.DeleteTeamButton
+{
+  background:green;
+  color: white;
+  padding: 10px;
+  border-radius: 0px 0px 20px 0px
+}
+.DeleteTeamButton
+{
+  background:red;
 }

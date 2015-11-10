@@ -22,20 +22,23 @@
 
 <body>
 
-	<a href ="#" onclick="add_Player('Navas Keylor','13')">AddPlayer</a>
+	<a href ="#" onclick="add_Player('Roberto Carnier','12')">AddPlayer</a>
 <a href ="#" onclick="add_Premios('STARDUST TOURNEMENT')">AddPREMIOS</a>
-<a href ="#" onclick="set_TeamName('Costa Rica')">change</a>
+<a href ="#" onclick="set_TeamName('Barcelona')">change</a>
 
-
-<div class="TeamBox">
+<div id="crearEquipo" class="Editor"> 
+<a href="CrearTeam.php"><input type="button" value ="Crear Nuevo Equipo" class="newTeamButton">  </input></a>
+<input type="button" value ="Editar Equipo Actual" class="EditTeamButton"></input>
+<input type="button" value ="Eliminar  Equipo" class="DeleteTeamButton"></input></div>
+<div id ="TeamBox"class="TeamBox" >
   <div class="Info">
-    <div id="teamName"class="Team_Name">Ticos</div>
+    <div id="teamName"class="Team_Name">FC Barcelona</div>
     <div class="Team_Flag">
-      <img class="resizesable"src='http://www.extralucha.com/wwe-fotos-images-smackdown-raw/2014/05/escudo-costarrica.jpg'>
+      <img class="resizesable"src='http://www.vexilologia.org/futbol/barcelona.png'>
     </div>
   </div>
   <div class="GrupalPhoto">
-    <img class="resizesable"src='http://www.diez.hn/csp/mediapool/sites/dt.common.streams.StreamServer.cls?STREAMOID=5KodOnNSjXoVrDTRk_ZF6c$daE2N3K4ZzOUsqbU5sYsFqG00qTs5qV7TM$YTIeI2WCsjLu883Ygn4B49Lvm9bPe2QeMKQdVeZmXF$9l$4uCZ8QDXhaHEp3rvzXRJFdy0KqPHLoMevcTLo3h8xh70Y6N_U_CryOsw6FTOdKL_jpQ-&CONTENTTYPE=image/jpeg'/>
+    <img class="resizesable"src='http://img02.mundodeportivo.com/2013/09/13/Foto-oficial-para-la-UEFA-del-_54383441586_54115221152_960_640.jpg'/>
   </div>
     <div id ="Players" class="Players"></div>
   <div id ="Premios"class="Premios_Box">
@@ -43,8 +46,6 @@
   <div><h1>Premios</h1></div>
   </div>
 </div>
-
-
 </body>
 
 

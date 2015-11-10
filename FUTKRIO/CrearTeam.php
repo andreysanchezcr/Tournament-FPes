@@ -23,7 +23,9 @@
 <a href ="#" onclick="add_Premios('STARDUST TOURNEMENT')">AddPREMIOS</a>
 <a href ="#" onclick="set_TeamName('Barcelona')">change</a>
 
-<div id="crearEquipo" class="Editor"> <input type="button" value ="Crear Equipo" class="newTeamButton"></input><input type="button" value ="Cancelar" class="newTeamButton"></input></div>
+<div id="crearEquipo" class="Editor"> 
+<input type="button" value ="Crear Equipo" class="newTeamButton"></input>
+<a href="javascript:history.back(-1);"><input type="button" value ="Cancelar" class="newTeamButton"></input></a></div>
 <div id ="TeamBox"class="TeamBox" >
   <div class="Info">
     <input id="teamName"placeholder=" Nombre del Equipo"class="Team_Name"></input>
