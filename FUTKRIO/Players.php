@@ -105,7 +105,7 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
     <div class="cajafoto">
       <div class="foto">.</div>
       <input></input>
-      <input type="button" value="Cargar foto"></input>
+      <input type="file" value="Cargar foto"></input>
     </div>
     <div class="cajainputs">
       <div class="etiqueta">nombre<input id ="noombre"></input></div>
