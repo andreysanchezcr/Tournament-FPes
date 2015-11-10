@@ -49,8 +49,7 @@
                     </select>
         <div class="select-label">Ciudad</div>
                   <select id="E_Ciudad" class="select_filtro_estadio" >               
-                  <option value="one">One</option>
-                  <option value="two">two</option>
+
                   </select>
         <div class="select-label">Foto</div>
         <input type="file" id="E_foto_estadio"></input>
@@ -63,12 +62,12 @@
       
       <!--///////////////////////////-->
       <div class = "caja_Nombre_Estadio">
-          <h1 id="nombreEstadio">Donut Stadium</h1>
-          <h4 id="capacidadEstadio">capacidad: 13 000 personas</h3>
-          <h3 id="cityEstadio">two</h3>
+          <h1 id="nombreEstadio"></h1>
+          <h4 id="capacidadEstadio"></h3>
+          <h3 id="cityEstadio"></h3>
       </div>
       <div id="descripcion"class = "caja_Descripcion">
-        Un estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigillo
+      
       </div>
     </div>
   </div>
