@@ -1,0 +1,147 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900,200italic,300italic,400italic,600italic,700italic,900italic);
+*{padding: 0px; margin:0px; }
+
+body
+{
+        background-image: url('../img/cancha.jpg');
+        background-size: 130% auto;
+        background-attachment: fixed;
+        background-position: 0 -167px ;
+
+      background-repeat: no-repeat;
+
+}
+.TeamBox
+{
+  color: white;
+  width: 800px;
+  margin: 20px auto;
+  text-align: center;
+  background: rgba(6,141,157,0.5);
+}
+.Info
+{
+  width: 100%;
+  height:280px;
+  font-size: 40px;
+  display: block;
+  overflow: hidden;
+  background: rgba(6,141,157,0.5);
+}
+.Team_Name
+{
+  width: 98.5%;
+  float: left;
+  height:70px;
+  padding-top: 10px;
+	font-family: 'Source Sans Pro', sans-serif;
+	font-weight: 900;
+	text-transform: uppercase;
+  font-size:50px;
+}
+.Team_Flag
+{
+  width: 300px;
+  height:150px;
+  font-size: 40px;
+  padding: 20px;
+  margin: 0px auto;
+  float:left;
+}
+.GrupalPhoto
+{
+  width: 800px;
+  height: 500px;
+  display: block;
+  margin-top:20px;
+
+
+}
+.resizesable
+{
+  width: 100%;  
+  height:100%;
+}
+.Players
+{
+  width: 100%;
+  max-height: 400px;
+  margin-top:40px;
+  display:block;
+  overflow:auto;
+}
+.Jugador
+{
+  float:left;
+  width: 110px;
+  height: 170px;
+  margin: 10px; 
+  
+  -webkit-transition: all 0.3s ease;
+-moz-transition: all 0.3s ease;
+-ms-transition: all 0.3s ease;
+-o-transition: all 0.3s ease;
+transition: all 0.3s ease;
+}
+.Jugador:hover .Player_Photo
+{
+  width: 110px;
+  height: 110px;
+  border-radius:55px;
+  -webkit-transition: all 0.3s ease;
+-moz-transition: all 0.3s ease;
+-ms-transition: all 0.3s ease;
+-o-transition: all 0.3s ease;
+transition: all 0.3s ease;
+}
+.Player_Photo
+{
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  background: red;
+}
+
+.Premios_Box
+{
+  height: 200px;
+  overflow: auto;
+}
+.Premio
+{
+ border-bottom: 4px solid #8dd; 
+padding: 10px;
+}
+
+
+.Editor
+{
+  color: white;
+  width: 800px;
+  margin: 20px auto;
+}
+.newTeamButton
+{
+  background:green;
+  color: white;
+  padding: 20px;
+  border-radius: 0px 0px 20px 0px;
+  font-size: 20px;
+}
+.cargarTitle,.CargarImagen
+{
+  font-size:18px;
+  float:left;
+  margin-top:15px;
+}
+.CargarImagen2  ,.cargarTitle2
+{
+  width: 800px;
+  display:block;
+  text-align:left;
+  
+}
+.JugadorLabel
+{
+  padding-top: 50px;
+}
