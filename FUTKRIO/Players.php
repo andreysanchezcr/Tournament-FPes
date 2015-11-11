@@ -16,8 +16,14 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
   	$gen=$_GET["gn"];
   	$equipo=$_GET["eq"];
   	$nacion=$_GET["nf"];
-    
 
+  	if($gen=="A"){
+  		$gen='';
+  	}else if($gen=="H"){
+  		$gen=0;
+  	}else{
+  		$gen=1;
+  	}
 
   }else{
      $nombre="";
@@ -36,7 +42,7 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
  $var="LuisMoto";
   $outrefc = ocinewcursor($conn); //Declare cursor variable
 
-  $mycursor = ociparse ($conn, "begin get_Players_Filtros(:curs,'$gen' ,'$equipo' ,'$nacion' ,'$nombre' ,'$apellido' ,'$nick' ); end;"); // prepare procedure call
+  $mycursor = ociparse ($conn, "begin get_Players_Filtros(:curs,'' ,'$equipo' ,'$nacion' ,'$nombre' ,'$apellido' ,'$nick' ); end;"); // prepare procedure call
   ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
   $ret = ociexecute($mycursor); // Execute function
   $ret = ociexecute($outrefc); // Execute cursor
