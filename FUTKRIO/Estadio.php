@@ -1,6 +1,7 @@
 <?php 
   include 'js/EstadioJS.php';
   include ("conexion.php");
+  include 'html/menuPrincipal.php';
  $conn = OCILogon($user, $pass, $db);
 ?>
 
