@@ -1,0 +1,64 @@
+
+.Evento_U ,.Evento_Nombre
+{
+  width: 800px;
+  margin: 0px auto;
+  text-align: center;
+} 
+
+.Evento_Nombre
+{
+  font-size: 38px;
+}
+.Fechas > div
+{
+  display: inline-block;
+  width: 200px;
+}
+.Fecha
+{
+  font-size: 20px;
+}
+.Descripcion
+{
+  width: 600px;
+  margin: 0px auto;
+  height: 200px;
+  overflow:auto;
+}
+.GroupBox
+{
+  width: 100%;   
+}
+.UnGrupo
+{
+
+}
+.GroupName
+{
+  font-size: 26px;
+  padding: 20px 0px 20px 0px;
+  background: rgba(16,161,180,0.5);
+}
+.TeamRow
+{
+  height:50px;
+  padding-top: 20px;
+  font-size: 18px;
+  display: block;
+
+}
+.stak
+{
+  display:inline-block;
+  width:70px;
+  margin: 1px;
+  background: rgba(6,141,120,0.8);
+}
+.ElTeamName
+{
+  width: 100px;
+  display:inline-block;
+  overflow:hidden;
+  height:50px;
+}
