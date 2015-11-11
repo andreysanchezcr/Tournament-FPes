@@ -33,3 +33,35 @@ BEGIN
    select Id_City into existe from City where name_city=ciudad AND fk_country_id=GETIDPAIS(pais);
    return existe;
 END;
+
+
+CREATE OR REPLACE FUNCTION getSequencestadium
+  RETURN number
+  IS contador number(20);
+  BEGIN
+     return SEQ_STADIUM.nextval;
+  END;
+  
+  
+select * from stadium;
+
+ALTER TABLE STADIUM
+ DROP COLUMN DESCRIPTION;
+ 
+ALTER TABLE STADIUM
+ADD DESCRIPCION VARCHAR(200);
+
+
+CREATE OR REPLACE PROCEDURE filtroEstadios(p_recordset out sys_refcursor, pais in varchar2, ciudadd in varchar2, nombre in varchar2) as
+begin
+  open p_recordset for
+
+  select stadium.id_stadium,stadium.name_stadium,stadium.capasity,stadium.DESCRIPCION,stadium.fk_city_id from stadium
+  where (getIDCountry(pais)=getFkCity(ciudadd) or pais is null or pais='' or ciudadd is null or ciudadd='')  and (stadium.name_stadium like nombre || '%' or nombre is null or nombre='');
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END filtroEstadios;

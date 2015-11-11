@@ -108,7 +108,6 @@ function edit_Stadium()
           document.getElementById("E_Capacidad").value='';
          // document.getElementById("E_Nombre").value=document.getElementById("cityEstadio").innerHTML;   
           document.getElementById("E_Descripcion").value='';
-          document.getElementById("botonNewEdit").setAttribute('onclick', 'new_Stadium();');  //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6
           document.getElementById("botonNewEdit").setAttribute('value', 'Crear Estadio');
           document.getElementById("botonNewEdit").setAttribute('name', 'crear');
           
@@ -212,7 +211,6 @@ function edit_box_show()
          // document.getElementById("E_Nombre").value=document.getElementById("cityEstadio").innerHTML;   
           document.getElementById("E_Descripcion").value=document.getElementById("descripcion").innerHTML;
 
-          document.getElementById("botonNewEdit").setAttribute('onclick', 'edit_Stadium();');  //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&6
           document.getElementById("botonNewEdit").setAttribute('value', 'Terminar Edición');
           document.getElementById("botonNewEdit").setAttribute('name', 'editar');
           var ciiudad = document.getElementById("cityEstadio").innerHTML;

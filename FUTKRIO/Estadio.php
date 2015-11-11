@@ -42,7 +42,7 @@
             <div class="select-label">Descripcion</div>
             <textarea id="E_Descripcion" name="descripcion" rows="10" cols="41">
             </textarea>
-            <input id="botonNewEdit" type="submit" value ="Crear Estadio" onclick="new_Stadium()"></input>
+            <input id="botonNewEdit" type="submit" value ="Crear Estadio"></input>
         </form>
 </div>
       
@@ -126,7 +126,7 @@
 
         echo "<a href='#'' onclick='set_Stadium_Grand(this.id)'' id='$nombre&&$capacidad&&$ciudad&&$descrip&&$source'>
                   <div class='subStadium'>
-                    <img id=$id_stadium class ='resizesable' src=$source/>
+                    <img id=$id_stadium class ='resizesable' src=$source>
                     <div class='subNameStm'>$nombre</div>  
                   </div>
              </a> ";

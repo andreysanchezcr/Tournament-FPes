@@ -30,6 +30,24 @@ CREATE OR REPLACE FUNCTION getIDCity(ciudad in varchar2, pais IN VARCHAR2)
 RETURN Number
 IS existe Number(6);
 BEGIN
-   select Id_City into existe from City where name_city=ciudad AND fk_country_id
+   select Id_City into existe from City where name_city=ciudad AND fk_country_id=GETIDPAIS(pais);
    return existe;
 END;
+
+
+CREATE OR REPLACE FUNCTION getSequencestadium
+  RETURN number
+  IS contador number(20);
+  BEGIN
+     return SEQ_STADIUM.nextval;
+  END;
+  
+  
+select * from stadium;
+
+ALTER TABLE STADIUM
+ DROP COLUMN DESCRIPTION;
+ 
+ALTER TABLE STADIUM
+ADD DESCRIPCION VARCHAR(200);
+
