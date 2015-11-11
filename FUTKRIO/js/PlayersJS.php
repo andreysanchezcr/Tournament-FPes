@@ -92,7 +92,8 @@ function Hide(arrray)
 <script type="text/javascript">
 function todos_Jugadores()
 {
-  alert("Todos los jugadores pa aca");
+  //window.location='Players.php';
+
 }
 </script>
 

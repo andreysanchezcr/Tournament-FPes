@@ -2,7 +2,7 @@ DROP PROCEDURE get_all_players;
 DROP PROCEDURE get_allplayers;
 
 
-CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
+CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in varchar2, equipo in varchar2, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
 begin
   open p_recordset for
   Select id_player, first_name, last_name, Nickname, t_Shirt_Num, photo,getNombrePais(fk_country_id) from player where ( getIdEquipo(fk_team_id)=equipo or equipo is null or equipo ='') and ( genre=genero or(genre=0 and genero='H') or(genre=1 and genero='M') or genero is null or genero='' or genero='A') and ( fk_country_id=getIDPais(nacionalidad) or nacionalidad is null or nacionalidad='') AND
