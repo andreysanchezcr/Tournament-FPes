@@ -211,8 +211,6 @@
 	        	$source="";
 	        }
 	        $session=0;
-
-<<<<<<< HEAD
 	        if($session==0){
 	        	$link='PlayerProfile.php?id='.$idPlayer;
 			    echo "<a href=$link>
@@ -253,51 +251,6 @@
 		echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
 		";
 		}
-=======
-	        if($session==1){
-		    echo "<a href='lugar'+id+''>
-					    <div class='Player'>
-					    <div class='Jugador_Camiseta'> $camisa </div>
-					    <div class='Jugador_Foto_Box'>
-					    	<img src=$source id='imagenNueva' class='resizesable'>
-					    </div>
-					    <div class='Jugador_Nombre' > $nombre $apellido </div>
-					    <div class='Jugador_Nombre'> $nick </div><div class='Jugador_Pais'> $nacionalidad </div></div>
-			    	</a>
-				  ";
-			}else{
-
-			echo "<div class='Player'><input class='E_Jugador_Camiseta' value=' $camisa '>
-			</input><div class='Jugador_Foto_Box'>Foto</div><input class='E_Jugador_Nombre' placeholder='Nombre' value=' $nombre '>
-			<input class='E_Jugador_Nombre' placeholder='Nick name' value=' $nick '></input><select class='E_Jugador_Pais'>
-
-
-";
-
-
-
-for($i=0;$i<count($listaPaises["NAME_COUNTRY"]);$i++){
-
-	$nombrePais=$listaPaises["NAME_COUNTRY"][$i];
-
-  
-          if($nacionalidad==$nombrePais)
-          {
-            echo"<option value=' $nombrePais ' selected> $nombrePais </option>";           
-          }
-          else{
-
-          	echo "<option value=' $nombrePais '> $nombrePais </option>";
-          	
-          }
-        }
-
-	echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
-        ";
- 
-
-			}
->>>>>>> origin/master
     }
 ?>
 
