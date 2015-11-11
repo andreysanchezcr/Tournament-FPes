@@ -28,29 +28,6 @@
 
 ?>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <head>
     <title>Fafi Futball y Nachos</title>
     <title>Jugadores</title> 
@@ -93,11 +70,12 @@
 for($i=0;$i<count($listaEquipos["ID_TEAM"]);$i++){
 
   $id_equipo=$listaEquipos["ID_TEAM"][$i];
+  $id_flagg=$listaEquipos["FK_FLAG"][$i];
 
   $nombrePais=$listaEquipos["NAME_TEAM"][$i];
-  $query = 'SELECT BLOBDATA FROM TEAM WHERE ID_TEAM = :MYBLOBID';
+  $query = 'SELECT BLOBDATA FROM FLAG WHERE ID_FLAG = :MYBLOBID';
           $stmt = oci_parse ($conn, $query);
-          oci_bind_by_name($stmt, ':MYBLOBID', $id_equipo);
+          oci_bind_by_name($stmt, ':MYBLOBID', $id_flagg);
           oci_execute($stmt, OCI_DEFAULT);
           $arr = oci_fetch_assoc($stmt);
           $prueba=$arr['BLOBDATA'];
@@ -107,15 +85,14 @@ for($i=0;$i<count($listaEquipos["ID_TEAM"]);$i++){
           }else{
             $source="";
           }
-
-
-  echo "<a id='$id_equipo' href='Team.php?id=id'>
-      <div class=resoult>
-        <div class='flag'>
-          <img src=$source>
-        </div>
-        <div class='team'> $nombrePais </div>
-      </div>
+  $link='team.php?id='.$id_equipo;
+  echo "<a href=$link>
+          <div class=resoult>
+            <div class='flag'>
+              <img src=$source style='width: 100%;height: 100%; border-radius:25px;' class='resizable'/>
+            </div>
+            <div class='team'> $nombrePais </div>
+          </div>
     </a>";
 
     echo "";

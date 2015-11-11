@@ -25,7 +25,7 @@ END;
 CREATE OR REPLACE PROCEDURE get_TeamsFiltro(p_recordset out sys_refcursor, namee in varchar2) as
 begin
   open p_recordset for
-  select id_team,name_team from team where (team.name_team like namee || '%' or namee is null or namee ='');
+  select id_team,name_team,fk_flag from team where (team.name_team like namee || '%' or namee is null or namee ='');
 
   exception
     when NO_DATA_FOUND THEN
@@ -34,3 +34,4 @@ begin
         RAISE;
 END get_TeamsFiltro;
 
+SELECT * FROM flag;
