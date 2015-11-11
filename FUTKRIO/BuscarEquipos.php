@@ -95,11 +95,25 @@ for($i=0;$i<count($listaEquipos["ID_TEAM"]);$i++){
   $id_equipo=$listaEquipos["ID_TEAM"][$i];
 
   $nombrePais=$listaEquipos["NAME_TEAM"][$i];
+  $query = 'SELECT BLOBDATA FROM TEAM WHERE ID_TEAM = :MYBLOBID';
+          $stmt = oci_parse ($conn, $query);
+          oci_bind_by_name($stmt, ':MYBLOBID', $id_equipo);
+          oci_execute($stmt, OCI_DEFAULT);
+          $arr = oci_fetch_assoc($stmt);
+          $prueba=$arr['BLOBDATA'];
+          if($prueba!=""){
+            $result = $arr['BLOBDATA']->load();
+            $source="data:image/jpeg;base64,".base64_encode( $result );
+          }else{
+            $source="";
+          }
 
 
   echo "<a id='$id_equipo' href='Team.php?id=id'>
       <div class=resoult>
-        <div class='flag'></div>
+        <div class='flag'>
+          <img src=$source>
+        </div>
         <div class='team'> $nombrePais </div>
       </div>
     </a>";
