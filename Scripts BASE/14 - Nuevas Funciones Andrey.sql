@@ -50,23 +50,8 @@ begin
         RAISE;
 END getInfoEvents;
 
--- Se pasa por parametro el ID del evento
-CREATE OR REPLACE FUNCTION getPhotoAward(evento in number)
-RETURN blob
-IS foto blob;
-BEGIN
-   select award.photo into foto from award where award.fk_event_id=evento;
-   return foto;
-END;
-
-insert into event(id_event,name_event,start_date,end_date,genero)
-values(1,'Nombre del evento',TO_DATE('01-03-2011','DD-MM-YYYY'),TO_DATE('01-03-2015','DD-MM-YYYY'),1);
-commit;
-
-select * from event;
 
 
 alter table event
 add genero number(1);
-
 

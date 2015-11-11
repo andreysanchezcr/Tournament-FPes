@@ -23,46 +23,45 @@
 <a href ="#" onclick="add_Premios('STARDUST TOURNEMENT')">AddPREMIOS</a>
 <a href ="#" onclick="set_TeamName('Barcelona')">change</a>
 
-<div id="crearEquipo" class="Editor"> 
-<input type="button" value ="Crear Equipo" class="newTeamButton"></input>
-<a href="javascript:history.back(-1);"><input type="button" value ="Cancelar" class="newTeamButton"></input></a></div>
-<div id ="TeamBox"class="TeamBox" >
-  <div class="Info">
-    <input id="teamName"placeholder=" Nombre del Equipo"class="Team_Name"></input>
-    <div class="Team_Flag">
-      <img class="resizesable"src='http://www.vexilologia.org/futbol/barcelona.png'>
-    </div>
-    
-      <div class="cargarTitle">Cargar Bandera</div>
-      <input type="file" class="CargarImagen"></input>
-    
-
-  </div>
-  <div class="GrupalPhoto">
-    <img class="resizesable"src='http://img02.mundodeportivo.com/2013/09/13/Foto-oficial-para-la-UEFA-del-_54383441586_54115221152_960_640.jpg'/>
-          <div class="cargarTitle2">Cargar Foto Grupal del Equipo</div>
-      <input type="file" class="CargarImagen2"></input>
-  </div>
-    <div><h1 class="JugadorLabel">Jugadores</h1>
-      <div>Agregar Jugador</div>
-      <input placeholder="Nombre"></input>
-      <input placeholder="Apellido"></input>
-      <input placeholder="Apodo"></input>
-      <input type="button" value="Buscar">
-      </input>
-      <div id="resultados">
-        <div>Jugador Nombre
-          <input type="button" value="Agregar al Equipo"></input>
-        </div> 
-        <div>Jugador Nombre
-          <input type="button" value="Agregar al Equipo"></input>
-        </div>  
+<form action='guardarNuevoEquipo.php' method='POST' enctype="multipart/form-data">
+  <div id="crearEquipo" class="Editor">
+  <input name="crearEquipo" type="submit" value ="Crear Equipo" class="newTeamButton"></input>
+  <a href="team.php"><input type="button" value ="Cancelar" class="newTeamButton"></input></a></div>
+  <div id ="TeamBox"class="TeamBox" >
+    <div class="Info">
+      <input id="teamName"placeholder=" Nombre del Equipo" class="Team_Name" name="nombreEquipo"></input>
+      <div class="Team_Flag">
+        <img class="resizesable"src='' id="imagenBandera">
       </div>
+        <div class="cargarTitle">Cargar Bandera</div>
+        <input type="file" class="CargarImagen" name="cargarBandera"></input>
     </div>
-    <div id ="Players" class="Players"></div>
-    
-  <div id ="Premios"class="Premios_Box">
-    
-  <div><h1>Premios</h1></div>
+    <div class="GrupalPhoto">
+      <img class="resizesable"src='' id="imagenEquipo"/>
+            <div class="cargarTitle2">Cargar Foto Grupal del Equipo</div>
+        <input type="file" class="CargarImagen2" name="cargarFoto"></input>
+    </div>
+      <div><h1 class="JugadorLabel">Jugadores</h1>
+        <div>Agregar Jugador</div>
+        <input placeholder="Nombre"></input>
+        <input placeholder="Apellido"></input>
+        <input placeholder="Apodo"></input>
+        <input type="button" value="Buscar">
+        </input>
+        <div id="resultados">
+          <div>Jugador Nombre
+            <input type="button" value="Agregar al Equipo"></input>
+          </div> 
+          <div>Jugador Nombre
+            <input type="button" value="Agregar al Equipo"></input>
+          </div>  
+        </div>
+      </div>
+      <div id ="Players" class="Players"></div>
+      
+    <div id ="Premios"class="Premios_Box">
+      
+    <div><h1>Premios</h1></div>
+    </div>
   </div>
-</div>
+</form>
