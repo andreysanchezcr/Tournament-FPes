@@ -18,7 +18,3 @@ BEGIN
 
    return idPais;
 END;
-
-insert into country(id_country,name_country)
-values(20,'Francia');
-commit;

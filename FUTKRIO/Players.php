@@ -4,9 +4,6 @@
     include 'html/menuPrincipal.php';
     $session=1;
 /*Variables*/
-$Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
-$Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");
-$Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 
   if(isset($_GET["N"]) or isset($_GET["ap"]) or isset($_GET["nk"]) or isset($_GET["gn"]) or isset($_GET["eq"]) or isset($_GET["nf"])){
 
@@ -146,23 +143,15 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 			</table>		
 		</div>
 
-<a href="#" onclick="add_Editable_Player('13','Navas Keylor','Navitas','Tico','idi','Tico$$CostaRica$$Sele')">add_editablePlayer 1</a>
-<a href="#" onclick="add_Editable_Player('13','Juan Keylor','Navitas','Tico','idi','Tico$$CostaRica$$Sele')">add_editablePlayer 2</a>
-
-<a href="#" onclick="add_Player('13','Navas Keylor','Navitas','Tico','idi')">navas</a>
-<a href="#" onclick="add_Player('13','juan Keylor','Navitas','Tico','idi')">juan</a>
-
-<a href="#" onclick="New_Player()">newplayer</a>
-<a href="#" onclick="Set_Nations('Costarricese$$Panemenense$$mexicanense')">fill nations</a>
 <a href="#" onclick="Hide()">hide</a>
 <div id="newBox" class="NewBox">
   <div>
   	<form action='registrarJugador.php' method='POST' enctype="multipart/form-data">
 	    <div class="cajafoto">
 	      <div class="foto">
-	      	<img src="" id="imagenNueva" class="resizesable">
+	      	<img src="" id="imgNew" class="resizesable">
 	      </div>
-	      <input type="file" name="imagenNueva">
+	      <input type="file" name="imagenNueva" id="imagenNueva">
 	    </div>
 	    <div class="cajainputs">
 	      <div class="etiqueta">Nombre<input id ="noombre" name="nombre"></input></div>
@@ -171,8 +160,8 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	      <div class="etiqueta">Número de camiseta<input id="camisa" name="numCamiseta"></input></div>
 	      <div class="etiqueta">Nacionalidad<select id="nacion" class="select" name="nacionalidad"></select></div>
 	      <div class="etiqueta">Género<select id="genero" class="select" name="genero">
-	      	<option value='h'>Hombre</option>
-	      	<option value='m'>Mujer</option>
+	      	<option value='H'>Hombre</option>
+	      	<option value='M'>Mujer</option>
 	      </select></div>
 	    </div>
 	    <div class="cajabotones">
@@ -199,22 +188,7 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
   $nrows = ocifetchstatement($outrefc, $listaPaises); // fetch data from cursor
   ocifreestatement($mycursor); // close procedure call
   ocifreestatement($outrefc); // close cursor
-  var_dump($listaPaises);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  //var_dump($listaPaises);
 
 	  for($p=0;$p<count($listaJugadores["FIRST_NAME"]);$p++){
 		    $nombre=$listaJugadores["FIRST_NAME"][$p];
@@ -236,76 +210,56 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	        }else{
 	        	$source="";
 	        }
-	        $session=1;
+	        $session=0;
 
-	        if(false){
-		    echo "<a href='lugar'+id+''>
-					    <div class='Player'>
-					    <div class='Jugador_Camiseta'> $camisa </div>
-					    <div class='Jugador_Foto_Box'>
-					    	<img src=$source id='imagenNueva' class='resizesable'>
-					    </div>
-					    <div class='Jugador_Nombre' > $nombre $apellido </div>
-					    <div class='Jugador_Nombre'> $nick </div><div class='Jugador_Pais'> $nacionalidad </div></div>
-			    	</a>
-				  ";
+	        if($session==0){
+	        	$link='PlayerProfile.php?id='.$idPlayer;
+			    echo "<a href=$link>
+						    <div class='Player'>
+							    <div class='Jugador_Camiseta'> $camisa </div>
+							    <div class='Jugador_Foto_Box'>
+							    	<img src=$source id='imagenNueva' class='resizesable'>
+							    </div>
+							    <div class='Jugador_Nombre' > $nombre $apellido </div>
+							    <div class='Jugador_Nombre'> $nick </div>
+							    <div class='Jugador_Pais'> $nacionalidad </div>
+						    </div>
+				    	</a>
+					  ";
 			}else{
+				echo "<div class='Player'>
+				<input class='E_Jugador_Camiseta' value=' $camisa '>
+				</input>
+				<div class='Jugador_Foto_Box'>
+					<img src=$source id='imagenNueva' class='resizesable'>
+				</div>
+				<input class='E_Jugador_Nombre' placeholder='Nombre' value='$nombre'>
+				<input class='E_Jugador_Nombre' placeholder='Apellido' value='$apellido'>
+				<input class='E_Jugador_Nombre' placeholder='Nick name' value='$nick'>
+				<select class='E_Jugador_Pais'>
+				</div>
+			";
 
-			echo "<div class='Player'><input class='E_Jugador_Camiseta' value=' $camisa '>
-			</input><div class='Jugador_Foto_Box'>Foto</div><input class='E_Jugador_Nombre' placeholder='Nombre' value=' $nombre '>
-			<input class='E_Jugador_Nombre' placeholder='Nick name' value=' $nick '></input><select class='E_Jugador_Pais'>
-
-
-";
-
-
-
-for($i=0;$i<count($listaPaises["NAME_COUNTRY"]);$i++){
-
-	$nombrePais=$listaPaises["NAME_COUNTRY"][$i];
-
-  
-          if($nacionalidad==$nombrePais)
-          {
-            echo"<option value=' $nombrePais ' selected> $nombrePais </option>";           
-          }
-          else{
-
-          	echo "<option value=' $nombrePais '> $nombrePais </option>";
-          	
-          }
-        }
-
-
-
-
-
-			echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
-        ";
- 
-
-			}
+		for($i=0;$i<count($listaPaises["NAME_COUNTRY"]);$i++){
+			$nombrePais=$listaPaises["NAME_COUNTRY"][$i];
+		          if($nacionalidad==$nombrePais){
+		            echo"<option value=' $nombrePais ' selected> $nombrePais </option>";           
+		          }
+		          else{
+					echo "<option value=' $nombrePais '> $nombrePais </option>";	
+		          }
+	 	}
+		echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
+		";
+		}
     }
 ?>
 
-
-	
-
- 
 </div>
 
 </body>
 
 	<?php
-		//cargar Eq
-		foreach ($Array_Equipos as $key) {
-			echo 	"<script type='text/javascript'>Cargar_Nombres_Equipos('$key')</script>";  
-		}
-		//cargar Paises
-		foreach ($Array_Nacionalidades as $key) {
-			echo 	"<script type='text/javascript'>Cargar_Nombres_Paises('$key')</script>";  
-		}
-
 
 		//CARGAR PAISES Y CIUDADES DEL CATÁLOGO
 	  $outrefc = ocinewcursor($conn); //Declare cursor variable

@@ -15,7 +15,6 @@ $ret = ociexecute($outrefc); // Execute cursor
 $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
 ocifreestatement($mycursor); // close procedure call
 ocifreestatement($outrefc); // close cursor
-$largo=count($data['ID_PLAYER']);
 for($i=0;$i<count($data['ID_PLAYER']);$i++){
 	$nombre=$data['FIRST_NAME'][$i];
 	$apellido=$data['LAST_NAME'][$i];
@@ -42,7 +41,18 @@ for($i=0;$i<count($data['NAME_AWARD']);$i++){
 		$premios=$premios.$data['NAME_AWARD'][$i];
 	}
 }
-
+$query = 'SELECT BLOBDATA FROM PLAYER WHERE ID_PLAYER = :MYBLOBID';
+	        $stmt = oci_parse ($conn, $query);
+	        oci_bind_by_name($stmt, ':MYBLOBID', $idPlayer);
+	        oci_execute($stmt, OCI_DEFAULT);
+	        $arr = oci_fetch_assoc($stmt);
+	        $prueba=$arr['BLOBDATA'];
+	        if($prueba!=""){
+	        	$result = $arr['BLOBDATA']->load();
+	        	$source="data:image/jpeg;base64,".base64_encode( $result );
+	        }else{
+	        	$source="";
+	        }
 OCILogoff($conn);
 
 ?>
@@ -60,8 +70,8 @@ OCILogoff($conn);
 				     var card_html = ''+
 				            '<div class = "Jugador_Carta">'+
 				      '<div class ="caja_Foto">'+
-				            '<img class ="resizesable" src= "	http://www.nosoloposters.com/3749-large_default/postal-real-madrid-keylor-navas-2014-15.jpg"/>'+
-				        '<div class="t-shirt-name">'+nomCamisa+'</div>'+
+				            '<img id="imagen" class ="resizesable"/>'+
+				        '<div class="t-shirt-name"><b>'+nomCamisa+'</b></div>'+
 				        '<div class="t-shirt">'+numCamisa+'</div>'+
 				      '</div>'+
 				      '<div class = "Jugador_Info">'+
@@ -81,6 +91,9 @@ OCILogoff($conn);
 				    '</div> ';
 				Caja_Jugadores.innerHTML= card_html;
 			}
+			function putImagen(source){
+				document.getElementById("imagen").src=source;
+			}
 		</script>
 	</head>
 	<body>
@@ -89,8 +102,8 @@ OCILogoff($conn);
   </div>
 </body>
 <?php
-
-
 	$nombre=$nombre." ".$apellido;
 	echo "<script type='text/javascript'>Mostrar_Perfil_Jugador('$nombre','$nickname','$pais','$premios','$numeroCamisa','$nickname');</script>";
+	echo"<script>putImagen('$source');</script>";
+	
 ?>

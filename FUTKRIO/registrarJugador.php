@@ -6,8 +6,11 @@
 		$numCamiseta=$_POST['numCamiseta'];
 		$nacionalidad=$_POST['nacionalidad'];
 		$genero=$_POST['genero'];
-
-		$genero=0;
+		if($genero=="H"){
+			$genero=0;
+		}else{
+			$genero=1;
+		}
 		$numCamiseta=1;
 
 		include ("conexion.php");
