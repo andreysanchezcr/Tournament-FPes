@@ -76,7 +76,7 @@
 <?php 
 
 
-  if(isset($_GET["Nb"])){
+  if(isset($_GET["Nb"]) or isset($_GET["ci"]) or isset($_GET["ip"])){
     $costa=$_GET["ip"];
     $ciudad=$_GET["ci"];
     $m=$_GET["Nb"];

@@ -65,3 +65,40 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END filtroEstadios;
+
+select * from stadium;
+
+DROP TABLE ACTION_X_PLAYER;
+
+create table ACTION_X_PLAYER
+(
+  fk_action_type_id NUMBER(6) not null,
+  fk_player_id      NUMBER(6) not null,
+  fk_match_id       NUMBER(6) not null,
+  fecha             DATE,
+  fec_creacion      DATE,
+  creado_por        VARCHAR2(10),
+  fec_ultima_mod    DATE,
+  user_ultima_mod   VARCHAR2(10)
+)
+alter table ACTION_X_PLAYER
+  add constraint PK_ACTION_PLAYER_ID primary key (FK_ACTION_TYPE_ID, FK_PLAYER_ID, FK_MATCH_ID,fecha)
+  using index 
+  tablespace LU_IND
+  pctfree 20
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 16K
+    next 16K
+  );
+alter table ACTION_X_PLAYER
+  add constraint FK_ACTION_TYPE_ID foreign key (FK_ACTION_TYPE_ID)
+  references ACTION_TYPE (ID_ACTIONTYPE);
+alter table ACTION_X_PLAYER
+  add constraint FK_ACTION_X_MATCH_ID foreign key (FK_MATCH_ID)
+  references MATCH (ID_MATCH);
+alter table ACTION_X_PLAYER
+  add constraint FK_ACTION_X_PLAYER_ID foreign key (FK_PLAYER_ID)
+  references PLAYER (ID_PLAYER);
