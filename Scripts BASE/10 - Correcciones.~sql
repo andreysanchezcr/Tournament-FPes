@@ -16,18 +16,6 @@ begin
         RAISE;
 END get_Players_Filtros;
 
-
-
-
-
-select * from player;
-
-
-
-insert into player(id_player,first_name,last_name,nickname,fk_team_id,t_shirt_num,fk_country_id)
-values(10,'Luis','Acuña','MotoLuis',0,12,0);
-commit;
-
 CREATE OR REPLACE FUNCTION getIdEquipo(nombre in varchar2)
 RETURN Number
 IS idPais Number(6);
@@ -36,10 +24,6 @@ BEGIN
 
    return idPais;
 END;
-
-
-
-
 
 CREATE OR REPLACE FUNCTION getNombrePais(id_ in number)
 RETURN varchar2
@@ -52,10 +36,6 @@ END;
 
 
 
-
-
-
-
 CREATE OR REPLACE FUNCTION getIDPais(nombre in varchar2)
 RETURN NUMBER
 IS idPais NUMBER(9);cantUsuario2 NUMBER(9);
@@ -64,11 +44,6 @@ BEGIN
 
    return idPais;
 END;
-
-
-
-DROP PROCEDURE get_players_nombre;
-
 
 
 CREATE OR REPLACE PROCEDURE get_paises_nombre(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
@@ -127,18 +102,11 @@ END getNameTeam;
 
 
 
-
-
-
 CREATE OR REPLACE FUNCTION getActionsinMatchAux(nombre in varchar2,id_partido in number, action in number)
 RETURN NUMBER
 IS cantidad NUMBER(9);
 BEGIN
-   
-	  
-
    select count(1) into cantidad from action_x_player where action_x_player.fk_match_id=id_partido and action_x_player.fk_action_type_id=action;
-
    return cantidad;
 END;
 
@@ -168,20 +136,6 @@ BEGIN
    select team.name_team into pais from team where team.id_team=id_;
    return pais;
 END;
-
-insert into match(id_match,fk_teamone_id,fk_teamtwo_id)
-values(2,0,1);
-commit;
-
-
-insert into team(id_team,name_team)
-values(1,'Equipo de prueba');
-commit;
-
-
-
-
-
 
 
 CREATE OR REPLACE FUNCTION contarAccionPlayerInPartido(id_jugador in number,id_partido in number,accion in number)
@@ -333,7 +287,121 @@ begin
 END getNameTeam;
 
 
+CREATE OR REPLACE PROCEDURE filtroEstadios(p_recordset out sys_refcursor, pais in varchar2, ciudadd in varchar2, nombre in varchar2) as
+begin
+  open p_recordset for
+
+  select description,id_stadium,name_stadium,capasity,name_city,name_country from (select * from (Select description,id_stadium,name_stadium,capasity,blobdata,fk_city_id from Stadium )
+
+   A full outer join (select city.id_city,city.name_city, city.fk_country_id from city) B on  A.FK_CITY_ID=B.ID_CITY   ) full outer join country
+ on  fk_country_id=country.id_country where (pais=name_country or pais is null or pais='') and (name_stadium like nombre || '%' or nombre is null or nombre='')  and (name_city=ciudadd or ciudadd is null or ciudadd='');-- and (name_stadium like nombre || '%');
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END filtroEstadios;
 
 
+CREATE OR REPLACE PROCEDURE get_Player(p_recordset out sys_refcursor,id_ in number) as
+begin
+  open p_recordset for
+
+  Select * from (Select id_player,first_name,last_name,nickname,t_shirt_num,blobdata,fk_country_id as pais from player
+  where id_player=id_) A
+  full outer join (select country.id_country,country.name_country from country) B on A.PAIS=B.ID_COUNTRY ;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Player;
 
 
+CREATE OR REPLACE PROCEDURE get_Stadium(p_recordset out sys_refcursor,id_ in number) as
+begin
+  open p_recordset for
+
+  select id_stadium,name_stadium,capasity,blobdata,name_city,name_country from (select * from (Select id_stadium,name_stadium,capasity,blobdata,fk_city_id from Stadium where stadium.id_stadium=id_)
+   A full outer join (select city.id_city as ciudad,city.name_city, city.fk_country_id from city) B on A.FK_CITY_ID=B.CIUDAD   ) full outer join country
+ on fk_country_id=country.id_country ;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Stadium;
+
+create or replace procedure update_Stadium(id_ in number,a_nombre in varchar2,param2 in number,lugar in number,foto in blob,ciudad in number)
+as tot_emps number;
+begin
+  update Stadium
+  set Stadium.Name_Stadium=a_nombre,Stadium.Capasity=param2,stadium.blobdata=foto,stadium.fk_city_id=ciudad
+
+  where stadium.id_stadium=id_;
+  commit;
+  tot_emps:=tot_emps-1;
+end;
+
+CREATE OR REPLACE PROCEDURE getNamesxPosition(p_recordset out sys_refcursor, alin in number,match in number) as
+begin
+  open p_recordset for
+
+
+  select  description,first_name from (select description,fk_player_id from
+  (select player_x_position.fk_position_id,player_x_position.fk_player_id from player_x_position where player_x_position.fk_align_id=match) A
+  full outer join position B on A.FK_POSITION_ID=b.id_position) C full outer join player D on fk_player_id=id_player ;
+
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getNamesxPosition;
+
+
+CREATE OR REPLACE PROCEDURE getAcciones(p_recordset out sys_refcursor, equipo in number,partido in number) as
+begin
+  open p_recordset for
+
+
+    select contarAccionPorEquipo(equipo	,partido,action_type.id_actiontype),Action_Type.Act_Name from Action_Type;
+
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getAcciones;
+
+CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
+begin
+  open p_recordset for
+  Select id_player, first_name, last_name, Nickname, t_Shirt_Num, photo,getNombrePais(fk_country_id) from player where ( fk_team_id=equipo or equipo is null or equipo ='') and ( genre=genero or genero is null or genero='') and ( fk_country_id=getIDPais(nacionalidad) or nacionalidad is null or nacionalidad='') AND
+   (first_name like nombre || '%' or nombre is null or nombre='') AND (last_name like apellido || '%' or apellido is null or apellido ='') AND
+   (Nickname like apodo || '%' or apodo is null or apodo ='');
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Players_Filtros;
+
+CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
+begin
+  open p_recordset for
+  Select id_player, first_name, last_name, Nickname, t_Shirt_Num, blobdata,getNombrePais(fk_country_id) from player where ( genre=genero or genero is null or genero='') and ( fk_country_id=getIDPais(nacionalidad) or nacionalidad is null or nacionalidad='') AND
+   (first_name like nombre || '%' or nombre is null or nombre='') AND (last_name like apellido || '%' or apellido is null or apellido ='') AND
+   (Nickname like apodo || '%' or apodo is null or apodo ='');
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_Players_Filtros;
