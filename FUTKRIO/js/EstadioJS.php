@@ -18,10 +18,11 @@
       {
          
         arrray = arrray.split("&&");
-document.getElementById("nombreEstadio").innerHTML=arrray[0];
-document.getElementById("capacidadEstadio").innerHTML='Capacidad: '+arrray[1]+' personas';
-document.getElementById("cityEstadio").innerHTML=arrray[2];   
-document.getElementById("descripcion").innerHTML=arrray[3];
+        document.getElementById("nombreEstadio").innerHTML=arrray[0];
+        document.getElementById("capacidadEstadio").innerHTML='Capacidad: '+arrray[1]+' personas';
+        document.getElementById("cityEstadio").innerHTML=arrray[2];   
+        document.getElementById("descripcion").innerHTML=arrray[3];
+        document.getElementById("imagenGrande").src=arrray[4];
       }
 </script>
 

@@ -32,7 +32,7 @@
   <div class ="DisplayEstadios">
   
     
-  <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
+  <img id="imagenGrande" class ="resizesable" src  = ""/>
     <div class ="caja_Estadio_Info">
       <div class="new showy"><a href="#" onclick="new_box_show()">Nuevo</a></div>
       <div class="editar showy"><a href="#" onclick="edit_box_show()">Editar</a></div>
@@ -123,9 +123,20 @@
         $capacidad=$data["CAPASITY"][$p];
         $ciudad=$data["NAME_CITY"][$p];
         $descrip=$data["DESCRIPTION"][$p];
-        echo "<a href='#'' onclick='set_Stadium_Grand(this.id)'' id='$nombre&&$capacidad&&$ciudad&&$descrip'>
+
+        $id_stadium=$data["ID_STADIUM"][$p];
+
+        $query = 'SELECT BLOBDATA FROM STADIUM WHERE ID_STADIUM = :MYBLOBID';
+        $stmt = oci_parse ($conn, $query);
+        oci_bind_by_name($stmt, ':MYBLOBID', $id_stadium);
+        oci_execute($stmt, OCI_DEFAULT);
+        $arr = oci_fetch_assoc($stmt);
+        $result = $arr['BLOBDATA']->load();
+        $source="data:image/jpeg;base64,".base64_encode( $result );
+
+        echo "<a href='#'' onclick='set_Stadium_Grand(this.id)'' id='$nombre&&$capacidad&&$ciudad&&$descrip&&$source'>
       <div class='subStadium'>
-        <img class ='resizesable' src  = 'http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg'/>
+        <img id=$id_stadium class ='resizesable' src  = $source/>
         <div class='subNameStm'>$nombre</div>  
       </div>
     </a> ";
