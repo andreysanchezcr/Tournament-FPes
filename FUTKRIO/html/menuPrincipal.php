@@ -24,7 +24,7 @@
 			<nav id="Menu-Perfil" class="menu">
 			  <ul>
 				    <li><a href="Eventos.php">Eventos</a></li>
-				    <li><a href="Team.php">Equipos</a></li>
+				    <li><a href="BuscarEquipos.php">Equipos</a></li>
 				    <li><a href="Players.php">Jugadores</a></li>
 				    <li><a href="Estadio.php">Estadios</a></li>
 			  		<li><a href="Estadisticas.php">Estasdisticas</a></li>

@@ -2,9 +2,8 @@
 	include 'js/php_jscrips.php';
 	include 'js/PlayersJS.php';
     include 'html/menuPrincipal.php';
-    $session=1;
+    $session=$_SESSION['ID'];
 /*Variables*/
-
   if(isset($_GET["N"]) or isset($_GET["ap"]) or isset($_GET["nk"]) or isset($_GET["gn"]) or isset($_GET["eq"]) or isset($_GET["nf"])){
 
   	$nombre=$_GET["N"];
@@ -142,8 +141,6 @@
 
 			</table>		
 		</div>
-
-<a href="#" onclick="Hide()">hide</a>
 <div id="newBox" class="NewBox">
   <div>
   	<form action='registrarJugador.php' method='POST' enctype="multipart/form-data">
@@ -172,9 +169,9 @@
 </div>
 <div id ="PlayersBox" class="PlayersBox">
 <?php  
-
-
-
+  if($session==0){
+  	echo "<script type='text/javascript'>Hide();</script>";
+  }
   $conn = OCILogon($user, $pass, $db);
 
   $idPartido=10;
@@ -210,7 +207,6 @@
 	        }else{
 	        	$source="";
 	        }
-	        $session=0;
 	        if($session==0){
 	        	$link='PlayerProfile.php?id='.$idPlayer;
 			    echo "<a href=$link>
@@ -274,6 +270,5 @@
 	    $pais=$data['NAME_COUNTRY'][$i];
 	    echo "<script type='text/javascript'>anadir_pais('$pais');</script>";
 	  }
-
 	  OCILogoff($conn);
 	?>

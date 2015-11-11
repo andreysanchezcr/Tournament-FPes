@@ -83,7 +83,7 @@ function Set_Nations(arrray)
 </script>
 
 <script type="text/javascript">
-function Hide(arrray)
+function Hide()
 {
   $("#newBox").addClass("hiddy");
 }
