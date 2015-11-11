@@ -1,8 +1,7 @@
 DROP PROCEDURE get_all_players;
 DROP PROCEDURE get_allplayers;
 
-ALTER TABLE Stadium
- ADD DESCRIPTION VArCHAR2(80);
+
 
 CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
 begin
@@ -59,5 +58,243 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END filtroEstadios;
+
+
+
+CREATE OR REPLACE PROCEDURE infoMatch(p_recordset out sys_refcursor, partido in number) as
+begin
+  open p_recordset for
+  
+  select id_match,name_match,fk_teamone_id,fk_teamtwo_id,fk_alignone_id,fk_aligntwo_id from match where id_match=partido;
+
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END infoMatch;
+
+CREATE OR REPLACE PROCEDURE getNameTeam(p_recordset out sys_refcursor, id_ in number) as
+begin
+  open p_recordset for
+  
+  select name_team from team where id_team=id_;
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getNameTeam;
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION getActionsinMatchAux(nombre in varchar2,id_partido in number, action in number)
+RETURN NUMBER
+IS cantidad NUMBER(9);
+BEGIN
+   
+	  
+
+   select count(1) into cantidad from action_x_player where action_x_player.fk_match_id=id_partido and action_x_player.fk_action_type_id=action;
+
+   return cantidad;
+END;
+
+
+CREATE OR REPLACE PROCEDURE getNamesxPosition(p_recordset out sys_refcursor, alin in number,match in number) as
+begin
+  open p_recordset for
+  
+
+  select  description,first_name from (select description,fk_player_id from
+  (select player_x_position.fk_position_id,player_x_position.fk_player_id from player_x_position where player_x_position.fk_align_id=match) A
+  full outer join position B on A.FK_POSITION_ID=b.id_position) C full outer join player D on fk_player_id=id_player ;
+  
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getNameTeam;
+
+CREATE OR REPLACE FUNCTION getNameCountry(id_ in number)
+RETURN varchar2
+IS pais varchar2(20);
+BEGIN
+
+   select team.name_team into pais from team where team.id_team=id_;
+   return pais;
+END;
+
+insert into match(id_match,fk_teamone_id,fk_teamtwo_id)
+values(2,0,1);
+commit;
+
+
+insert into team(id_team,name_team)
+values(1,'Equipo de prueba');
+commit;
+
+
+
+
+
+
+
+CREATE OR REPLACE FUNCTION contarAccionPlayerInPartido(id_jugador in number,id_partido in number,accion in number)
+RETURN varchar2
+IS contador number(20);
+BEGIN
+
+   select count(1) into contador from(action_x_player) where action_x_player.fk_action_type_id=accion and action_x_player.fk_player_id=id_jugador and action_x_player.fk_match_id=id_partido;
+   
+   return contador;
+END;
+
+CREATE OR REPLACE FUNCTION contarAccionPorEquipo(id_equipo in number,id_partido in number,accion in number)
+RETURN varchar2
+IS contador number(20);
+BEGIN
+
+   select sum(contarAccionPlayerInPartido(player_x_team.fk_player_id,id_partido,accion)) into contador from player_x_team where player_x_team.fk_team_id=id_equipo;
+   
+
+   return contador;
+END;
+
+CREATE OR REPLACE PROCEDURE getAcciones(p_recordset out sys_refcursor, equipo in number,partido in number) as
+begin
+  open p_recordset for
+
+   select contarAccionPorEquipo(id_equipo	,id_partido,action_type.id_actiontype) as contador,Action_Type.Description from Action_Type;
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getAcciones;
+
+
+
+
+CREATE OR REPLACE PROCEDURE getAcciones(p_recordset out sys_refcursor, equipo in number,partido in number) as
+begin
+  open p_recordset for
+  
+
+    select contarAccionPorEquipo(equipo	,partido,action_type.id_actiontype),Action_Type.Description from Action_Type;
+  
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getAcciones;
+
+
+
+CREATE OR REPLACE PROCEDURE getPotisions(p_recordset out sys_refcursor, equipo in number,match in number) as
+begin
+  open p_recordset for
+  
+
+    select 
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getStadistics;
+
+
+
+
+
+CREATE OR REPLACE FUNCTION getPositionByIDP(id_ in number)
+RETURN varchar2
+IS nombre varchar(20);
+BEGIN
+
+   select position.description into nombre from position where position.id_position=id_;
+
+   return nombre;
+END;
+
+
+
+CREATE OR REPLACE FUNCTION getNamePlayer(id_ in number)
+RETURN varchar2
+IS nombre varchar(20);
+BEGIN
+
+   select player.first_name into nombre from player where player.id_player=id_; 
+
+   return nombre;
+END;
+
+CREATE OR REPLACE PROCEDURE getPotisions(p_recordset out sys_refcursor, alin in number) as
+begin
+  open p_recordset for
+
+
+    select getPositionByIDP(player_x_position.fk_position_id) as posicion,getNamePlayer(player_x_position.fk_player_id) as nombre from player_x_position
+    where player_x_position.fk_align_id=alin order by posicion asc;
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getPotisions;
+
+
+
+
+CREATE OR REPLACE PROCEDURE getStadistics(p_recordset out sys_refcursor, alin in number,match in number) as
+begin
+  open p_recordset for
+  
+
+    select action_type.description, getActionsinMatchAux(0,action_type.id_actiontype) from action_type;
+  
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getStadistics;
+
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE getNamesxPosition(p_recordset out sys_refcursor, alin in number,match in number) as
+begin
+  open p_recordset for
+  
+
+  select  description,first_name from (select description,fk_player_id from
+  (select player_x_position.fk_position_id,player_x_position.fk_player_id from player_x_position where player_x_position.fk_align_id=match) A
+  full outer join position B on A.FK_POSITION_ID=b.id_position) C full outer join player D on fk_player_id=id_player ;
+  
+  
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END getNameTeam;
+
+
+
+
 
 
