@@ -1,6 +1,55 @@
 <?php  
 	include 'js/TeamJS.php';
   include 'html/menuPrincipal.php';
+  include ("conexion.php");
+
+  if(isset($_GET["id"])){
+    $idEquipo=$_GET["id"];
+
+  }
+
+  $conn = OCILogon($user, $pass, $db);
+
+  $outrefc = ocinewcursor($conn); //Declare cursor variable
+
+  $mycursor = ociparse ($conn, "begin getInfoTeam(:curs, $idEquipo); end;"); // prepare procedure call
+  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+  $ret = ociexecute($mycursor); // Execute function
+  $ret = ociexecute($outrefc); // Execute cursor
+  $nrows = ocifetchstatement($outrefc, $infoEquipo); // fetch data from cursor
+  ocifreestatement($mycursor); // close procedure call
+  ocifreestatement($outrefc); // close cursor
+
+
+  $nombre=$infoEquipo["NAME_TEAM"][0];
+  $idEquipo=$infoEquipo["ID_TEAM"][0];
+  $fkBandera=$infoEquipo["FK_FLAG"][0];
+
+  $query = 'SELECT BLOBDATA FROM TEAM WHERE ID_TEAM = :MYBLOBID';
+  $stmt = oci_parse ($conn, $query);
+  oci_bind_by_name($stmt, ':MYBLOBID', $idEquipo);
+  oci_execute($stmt, OCI_DEFAULT);
+  $arr = oci_fetch_assoc($stmt);
+  $prueba=$arr['BLOBDATA'];
+  if($prueba!=""){
+    $result = $arr['BLOBDATA']->load();
+    $sourceEquipo="data:image/jpeg;base64,".base64_encode( $result );
+  }else{
+    $sourceEquipo="";
+  }
+
+    $query = 'SELECT BLOBDATA FROM FLAG WHERE ID_FLAG = :MYBLOBID';
+    $stmt = oci_parse ($conn, $query);
+    oci_bind_by_name($stmt, ':MYBLOBID', $fkBandera);
+    oci_execute($stmt, OCI_DEFAULT);
+    $arr = oci_fetch_assoc($stmt);
+    $prueba=$arr['BLOBDATA'];
+    if($prueba!=""){
+      $result = $arr['BLOBDATA']->load();
+      $sourceFlag="data:image/jpeg;base64,".base64_encode( $result );
+    }else{
+      $sourceFlag="";
+    }
 
 ?>
 
@@ -16,8 +65,6 @@
     <script language="javascript" type="text/javascript" src="js/InputAnimation.js"></script>
     <script language="javascript" type="text/javascript" src="js/calendar.js"></script>
 
-
-
   </head>
 
 <body>
@@ -32,18 +79,46 @@
 <input type="button" value ="Eliminar  Equipo" class="DeleteTeamButton"></input></div>
 <div id ="TeamBox"class="TeamBox" >
   <div class="Info">
-    <div id="teamName"class="Team_Name">FC Barcelona</div>
-    <div class="Team_Flag">
-      <img class="resizesable"src='http://www.vexilologia.org/futbol/barcelona.png'>
+
+     <?php 
+     echo "<div id='teamName'class='Team_Name'> $nombre </div>
+    <div class='Team_Flag'>
+
+       <img class='resizesable'src= $sourceFlag>";
+?>
     </div>
   </div>
   <div class="GrupalPhoto">
-    <img class="resizesable"src='http://img02.mundodeportivo.com/2013/09/13/Foto-oficial-para-la-UEFA-del-_54383441586_54115221152_960_640.jpg'/>
-  </div>
-    <div id ="Players" class="Players"></div>
-  <div id ="Premios"class="Premios_Box">
+ <?php 
+      echo "<img class='resizesable'src=$sourceEquipo/>
+        </div>
+    <div id ='Players' class='Players'></div>
+  <div id ='Premios'class='Premios_Box'>
+ ";
+  $conn = OCILogon($user, $pass, $db);
+
+  $outrefc = ocinewcursor($conn); //Declare cursor variable
+
+  $mycursor = ociparse ($conn, "begin getAwardsbyTeam(:curs, $idEquipo); end;"); // prepare procedure call
+  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+  $ret = ociexecute($mycursor); // Execute function
+  $ret = ociexecute($outrefc); // Execute cursor
+  $nrows = ocifetchstatement($outrefc, $listaPremios); // fetch data from cursor
+  ocifreestatement($mycursor); // close procedure call
+  ocifreestatement($outrefc); // close cursor
+
+  for($i=0;$i<count($listaPremios["NAME_AWARD"]);$i++){
+
+  $nombrePremio=$listaPremios["NAME_AWARD"][$i];
+
+       echo " <div><h1>$nombrePremio</h1></div>";
+  }
+
+?>
+
+
     
-  <div><h1>Premios</h1></div>
+ 
   </div>
 </div>
 </body>
