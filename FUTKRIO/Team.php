@@ -112,8 +112,9 @@
   $nombrePremio=$listaPremios["NAME_AWARD"][$i];
       echo " <div><h2>$nombrePremio</h2></div>";
   }
-  $link="Players.php?N=&ap=&nk=&gn=A&eq=$idEquipo&nf=&bAva=0";
-  echo " <div><a href='$link'>Ver jugadores</a></div>";
+  $link="Players.php?N=&ap=&nk=&gn=A&eq=$nombre&nf=&bAva=1";
+  
+  echo " <div><a href='$link'><h1>Ver jugadores</h1></a></div>";
 ?>
 
 

@@ -44,7 +44,7 @@
  $var="LuisMoto";
   $outrefc = ocinewcursor($conn); //Declare cursor variable
 
-  $mycursor = ociparse ($conn, "begin get_Players_Filtros(:curs,'' ,'$equipo' ,'$nacion' ,'$nombre' ,'$apellido' ,'$nick' ); end;"); // prepare procedure call
+  $mycursor = ociparse ($conn, "begin get_Players_Filtros(:curs,'' ,'$nacion' ,'$nombre' ,'$apellido' ,'$nick' ); end;"); // prepare procedure call
   ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
   $ret = ociexecute($mycursor); // Execute function
   $ret = ociexecute($outrefc); // Execute cursor
@@ -186,66 +186,77 @@
   ocifreestatement($mycursor); // close procedure call
   ocifreestatement($outrefc); // close cursor
   //var_dump($listaPaises);
-
 	  for($p=0;$p<count($listaJugadores["FIRST_NAME"]);$p++){
-		    $nombre=$listaJugadores["FIRST_NAME"][$p];
-		    $apellido=$listaJugadores["LAST_NAME"][$p];
-		    $nick=$listaJugadores["NICKNAME"][$p];
-		    $camisa=$listaJugadores["T_SHIRT_NUM"][$p];
-		    $nacionalidad=$listaJugadores["GETNOMBREPAIS(FK_COUNTRY_ID)"][$p];
-		    $idPlayer=$listaJugadores["ID_PLAYER"][$p];
+	  		$id_persona=$listaJugadores["ID_PLAYER"][$p];
+	  		$hago=1;
+	  		if($equipo!=""){
+	  			$stid = oci_parse($conn, "begin :ret :=EXISTEEQUIPO('$equipo','$id_persona'); end;");
+		    	oci_bind_by_name($stid, ':ret', $equipo2, 200);
+  				oci_execute($stid);
+  				if($equipo2==0){
+  					$hago=0;
+  				}
+  			}
+  			if($hago==1){
+			    $nombre=$listaJugadores["FIRST_NAME"][$p];
+			    $apellido=$listaJugadores["LAST_NAME"][$p];
+			    $nick=$listaJugadores["NICKNAME"][$p];
+			    $camisa=$listaJugadores["T_SHIRT_NUM"][$p];
+			    $nacionalidad=$listaJugadores["GETNOMBREPAIS(FK_COUNTRY_ID)"][$p];
+			    $idPlayer=$listaJugadores["ID_PLAYER"][$p];
 
-		    $query = 'SELECT BLOBDATA FROM PLAYER WHERE ID_PLAYER = :MYBLOBID';
-	        $stmt = oci_parse ($conn, $query);
-	        oci_bind_by_name($stmt, ':MYBLOBID', $idPlayer);
-	        oci_execute($stmt, OCI_DEFAULT);
-	        $arr = oci_fetch_assoc($stmt);
-	        $prueba=$arr['BLOBDATA'];
-	        if($prueba!=""){
-	        	$result = $arr['BLOBDATA']->load();
-	        	$source="data:image/jpeg;base64,".base64_encode( $result );
-	        }else{
-	        	$source="";
-	        }
-	        if($session==0){
-	        	$link='PlayerProfile.php?id='.$idPlayer;
-			    echo "<a href=$link>
-						    <div class='Player'>
-							    <div class='Jugador_Camiseta'> $camisa </div>
-							    <div class='Jugador_Foto_Box'>
-							    	<img src=$source id='imagenNueva' class='resizesable'>
+			    $query = 'SELECT BLOBDATA FROM PLAYER WHERE ID_PLAYER = :MYBLOBID';
+		        $stmt = oci_parse ($conn, $query);
+		        oci_bind_by_name($stmt, ':MYBLOBID', $idPlayer);
+		        oci_execute($stmt, OCI_DEFAULT);
+		        $arr = oci_fetch_assoc($stmt);
+		        $prueba=$arr['BLOBDATA'];
+		        if($prueba!=""){
+		        	$result = $arr['BLOBDATA']->load();
+		        	$source="data:image/jpeg;base64,".base64_encode( $result );
+		        }else{
+		        	$source="";
+		        }
+		        if($session==0){
+		        	$link='PlayerProfile.php?id='.$idPlayer;
+				    echo "<a href=$link>
+							    <div class='Player'>
+								    <div class='Jugador_Camiseta'> $camisa </div>
+								    <div class='Jugador_Foto_Box'>
+								    	<img src=$source id='imagenNueva' class='resizesable'>
+								    </div>
+								    <div class='Jugador_Nombre' > $nombre $apellido </div>
+								    <div class='Jugador_Nombre'> $nick </div>
+								    <div class='Jugador_Pais'> $nacionalidad </div>
 							    </div>
-							    <div class='Jugador_Nombre' > $nombre $apellido </div>
-							    <div class='Jugador_Nombre'> $nick </div>
-							    <div class='Jugador_Pais'> $nacionalidad </div>
-						    </div>
-				    	</a>
-					  ";
-			}else{
-				echo "<div class='Player'>
-				<input class='E_Jugador_Camiseta' value=' $camisa '>
-				</input>
-				<div class='Jugador_Foto_Box'>
-					<img src=$source id='imagenNueva' class='resizesable'>
-				</div>
-				<input class='E_Jugador_Nombre' placeholder='Nombre' value='$nombre'>
-				<input class='E_Jugador_Nombre' placeholder='Apellido' value='$apellido'>
-				<input class='E_Jugador_Nombre' placeholder='Nick name' value='$nick'>
-				<select class='E_Jugador_Pais'>
-				</div>
-			";
+					    	</a>
+						  ";
+				}else{
+					echo "<div class='Player'>
+					<input class='E_Jugador_Camiseta' value=' $camisa '>
+					</input>
+					<div class='Jugador_Foto_Box'>
+						<img src=$source id='imagenNueva' class='resizesable'>
+					</div>
+					<input class='E_Jugador_Nombre' placeholder='Nombre' value='$nombre'>
+					<input class='E_Jugador_Nombre' placeholder='Apellido' value='$apellido'>
+					<input class='E_Jugador_Nombre' placeholder='Nick name' value='$nick'>
+					<select class='E_Jugador_Pais'>
+					</div>
+				";
 
-		for($i=0;$i<count($listaPaises["NAME_COUNTRY"]);$i++){
-			$nombrePais=$listaPaises["NAME_COUNTRY"][$i];
-		          if($nacionalidad==$nombrePais){
-		            echo"<option value=' $nombrePais ' selected> $nombrePais </option>";           
-		          }
-		          else{
-					echo "<option value=' $nombrePais '> $nombrePais </option>";	
-		          }
-	 	}
-		echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
-		";
+			for($i=0;$i<count($listaPaises["NAME_COUNTRY"]);$i++){
+				$nombrePais=$listaPaises["NAME_COUNTRY"][$i];
+			          if($nacionalidad==$nombrePais){
+			            echo"<option value=' $nombrePais ' selected> $nombrePais </option>";           
+			          }
+			          else{
+						echo "<option value=' $nombrePais '> $nombrePais </option>";	
+			          }
+		 	}
+			echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
+			";
+			}
 		}
     }
 ?>
