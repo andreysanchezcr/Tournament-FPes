@@ -131,10 +131,15 @@ function anadir_pais(pais)
   paises[cantPaises][0]=pais;
   paises[cantPaises][1]=0;
   var select = document.getElementById('E_Pais');
+  var select2 = document.getElementById('Pais_Filtro');
   var option = document.createElement('option');
+  var option2 = document.createElement('option');
   option.text=pais;
   option.value=pais;
+  option2.text=pais;
+  option2.value=pais;
   select.add(option);
+  select2.add(option2);
   cantPaises++;
 }
 function anadir_ciudad(pais,ciudad)
@@ -159,6 +164,26 @@ function elegirPais(){
         for(i=0;i<cantPaises;i++){
           if(paises[i][0] == seleccion){
             var select2 = document.getElementById('E_Ciudad');
+            for(k=0;k<paises[i][1];k++){
+              var option = document.createElement('option');
+              option.text = paises[i][k+2];
+              option.value = paises[i][k+2];
+              select2.add(option);
+            }
+            i=cantPaises;
+          }
+        }
+      }
+function elegirPais2(){
+        var select = document.getElementById('Ciudad_Filtro');
+        var pais = document.getElementById('Pais_Filtro');
+        var seleccion = pais.options[pais.selectedIndex].value;
+        while(select.selectedIndex != -1){
+          select.remove(select.selectedIndex);
+        }
+        for(i=0;i<cantPaises;i++){
+          if(paises[i][0] == seleccion){
+            var select2 = document.getElementById('Ciudad_Filtro');
             for(k=0;k<paises[i][1];k++){
               var option = document.createElement('option');
               option.text = paises[i][k+2];

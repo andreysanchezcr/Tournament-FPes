@@ -77,7 +77,7 @@
       <div class="select-label">Nombre</div>
       <input id="Nombre_Filtro"></input>
                 <div class="select-label">Pais</div>
-                <select id="Pais_Filtro" class="select_filtro_estadio">     
+                <select onclick="elegirPais2()" id="Pais_Filtro" class="select_filtro_estadio">     
                   </select>
       <div class="select-label">Ciudad</div>
                 <select id="Ciudad_Filtro" class="select_filtro_estadio" >                
@@ -114,9 +114,8 @@
   $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
   ocifreestatement($mycursor); // close procedure call
   ocifreestatement($outrefc); // close cursor
-  var_dump($data);
+  //var_dump($data);
 
-  $prueba="hola ".count($data["ID_STADIUM"]);
   echo " <div id ='subStadiumBox'class='subStadiumBox'>";
   for($p=0;$p<count($data["ID_STADIUM"]);$p++){
         $nombre=$data["NAME_STADIUM"][$p];
@@ -131,8 +130,13 @@
         oci_bind_by_name($stmt, ':MYBLOBID', $id_stadium);
         oci_execute($stmt, OCI_DEFAULT);
         $arr = oci_fetch_assoc($stmt);
-        $result = $arr['BLOBDATA']->load();
-        $source="data:image/jpeg;base64,".base64_encode( $result );
+        $prueba=$arr['BLOBDATA'];
+        if($prueba!=""){
+          $result = $arr['BLOBDATA']->load();
+          $source="data:image/jpeg;base64,".base64_encode( $result );
+        }else{
+          $source="";
+        }
 
         echo "<a href='#'' onclick='set_Stadium_Grand(this.id)'' id='$nombre&&$capacidad&&$ciudad&&$descrip&&$source'>
       <div class='subStadium'>
@@ -141,6 +145,37 @@
       </div>
     </a> ";
   }
+
+  //CARGAR PAISES Y CIUDADES DEL CATÁLOGO
+  $outrefc = ocinewcursor($conn); //Declare cursor variable
+  $mycursor = ociparse ($conn, "begin get_AllCountries(:curs) ; end;"); // prepare procedure call
+  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+  $ret = ociexecute($mycursor); // Execute function
+  $ret = ociexecute($outrefc); // Execute cursor
+  $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
+  ocifreestatement($mycursor); // close procedure call
+  ocifreestatement($outrefc); // close cursor
+
+  for($i=0;$i<count($data['ID_COUNTRY']);$i++){
+    $pais_id=$data['ID_COUNTRY'][$i];
+    $pais=$data['NAME_COUNTRY'][$i];
+    echo "<script type='text/javascript'>anadir_pais('$pais');</script>";
+    $outrefc = ocinewcursor($conn); //Declare cursor variable
+    $mycursor = ociparse ($conn, "begin get_City_in_Country(:curs,'$pais_id') ; end;"); // prepare procedure call
+    ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+    $ret = ociexecute($mycursor); // Execute function
+    $ret = ociexecute($outrefc); // Execute cursor
+    $nrows = ocifetchstatement($outrefc, $data2); // fetch data from cursor
+    ocifreestatement($mycursor); // close procedure call
+    ocifreestatement($outrefc); // close cursor
+    for($k=0;$k<count($data2['NAME_CITY']);$k++){
+      $ciudad=$data2['NAME_CITY'][$k];
+      echo "<script type='text/javascript'>anadir_ciudad('$pais','$ciudad');</script>";
+    }
+    echo "<script type='text/javascript'>elegirPais();</script>";
+    echo "<script type='text/javascript'>elegirPais2();</script>"; 
+  }
+
 
   OCILogoff($conn);
 
