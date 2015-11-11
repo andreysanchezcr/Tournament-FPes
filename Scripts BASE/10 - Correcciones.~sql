@@ -414,3 +414,4 @@ BEGIN
    select count(1) into existe from Player_x_Team where fk_team_id=GETIDEQUIPO(nombre);
    return existe;
 END;
+select * from stadium;

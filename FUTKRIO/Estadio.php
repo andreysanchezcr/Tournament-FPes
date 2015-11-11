@@ -105,7 +105,7 @@
   }
 
 
-    $outrefc = ocinewcursor($conn); //Declare cursor variable
+  $outrefc = ocinewcursor($conn); //Declare cursor variable
 
   $mycursor = ociparse ($conn, "begin filtroEstadios(:curs,'$costa','$ciudad','$m'); end;"); // prepare procedure call
   ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
@@ -114,10 +114,11 @@
   $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
   ocifreestatement($mycursor); // close procedure call
   ocifreestatement($outrefc); // close cursor
- // var_dump($data);
+  var_dump($data);
 
+  $prueba="hola ".count($data["ID_STADIUM"]);
   echo " <div id ='subStadiumBox'class='subStadiumBox'>";
-
+  echo "<script type='text/javascript'>alert('$prueba');</script>";
   for($p=0;$p<count($data["ID_STADIUM"]);$p++){
         $nombre=$data["NAME_STADIUM"][$p];
         $capacidad=$data["CAPASITY"][$p];
@@ -142,7 +143,7 @@
     </a> ";
   }
 
-
+  OCILogoff($conn);
 
 ?>
 
