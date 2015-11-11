@@ -18,7 +18,6 @@ BEGIN
 
    return idPais;
 END;
-<<<<<<< HEAD
 
 
 
@@ -35,5 +34,3 @@ begin
         RAISE;
 END get_TeamsFiltro;
 
-=======
->>>>>>> origin/master
