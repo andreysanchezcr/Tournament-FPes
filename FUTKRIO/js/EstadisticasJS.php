@@ -35,9 +35,9 @@ function Set_Acciones(Accion,Cantidad)
   var item='';
   for(var i = 0; i< Accion.length ; i++)
     {
-       item+='<div class="AccionJugada">'+
-              '<div class="Accion">'+Accion[i]+'</div>'+
-              '<div class="Cantidad">'+Cantidad[i]+'</div>'+
+       item+='<div>'+
+              '<div>'+Accion[i]+'</div>'+
+              '<div class="AccionJugada">'+Cantidad[i]+'</div>'+
             '<div>';
     }
   box.innerHTML+=item;

@@ -46,3 +46,19 @@ BEGIN
    return cantidad;
 END;
 
+ALTER TABLE ACTION_TYPE
+      DROP COLUMN DESCRIPTION;
+      
+ALTER TABLE ACTION_TYPE
+      ADD ACT_NAME VARCHAR2(20);
+      
+CREATE OR REPLACE PROCEDURE get_AllActions(p_recordset out sys_refcursor) as
+begin
+  open p_recordset for
+  select id_actiontype,act_name from action_type;
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_AllActions;

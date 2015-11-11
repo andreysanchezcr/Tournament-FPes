@@ -16,13 +16,6 @@
   </head>
 
 
-<a href="#" onclick="Set_Jugadores('506','404','1010')"> jugadores</a>
-<a href="#" onclick="Set_Equipos('506')"> equipos</a>
-<a href="#" onclick="Set_Estadios('546')"> estadios</a>
-<a href="#" onclick="Set_Partidos('5426')"> partidoos</a>
-<a href="#" onclick="Set_Eventos('26')"> Eventos</a>
-<a href="#" onclick="Set_Acciones('patadas$$codazos','23$$43')"> Acciones</a>
-
 <div id="CajaEstadisticas">
   <div class="Item">
     <div class="Title">Jugadores Registrados</div>
@@ -53,8 +46,6 @@
     <div class="Title">Acciones</div>
     <div class="Cant" id="CajaAcciones">
       <div class="AccionJugada">
-        <div class="Accion">patadas</div>
-        <div class="Cantidad">500</div>
       <div>
     </div>
   </div>
@@ -63,3 +54,66 @@
   
   
 </div>
+
+<?php
+    include ("conexion.php");
+    $conn = OCILogon($user, $pass, $db);
+
+    $outrefc = ocinewcursor($conn); //Declare cursor variable
+
+    $stid = oci_parse($conn, "begin :ret :=COUNTMEN(); end;");
+    oci_bind_by_name($stid, ':ret', $men, 200);
+    oci_execute($stid);
+
+    $stid = oci_parse($conn, "begin :ret :=COUNTWOMEN(); end;");
+    oci_bind_by_name($stid, ':ret', $women, 200);
+    oci_execute($stid);
+
+    $stid = oci_parse($conn, "begin :ret :=COUNTTEAM(); end;");
+    oci_bind_by_name($stid, ':ret', $team, 200);
+    oci_execute($stid);
+
+    $stid = oci_parse($conn, "begin :ret :=COUNTSTADIUM(); end;");
+    oci_bind_by_name($stid, ':ret', $stadium, 200);
+    oci_execute($stid);
+
+    $stid = oci_parse($conn, "begin :ret :=COUNTMATCH(); end;");
+    oci_bind_by_name($stid, ':ret', $match, 200);
+    oci_execute($stid);
+
+    $stid = oci_parse($conn, "begin :ret :=COUNTEVENT(); end;");
+    oci_bind_by_name($stid, ':ret', $event, 200);
+    oci_execute($stid);
+
+    $outrefc = ocinewcursor($conn); //Declare cursor variable
+    $mycursor = ociparse ($conn, "begin get_AllActions(:curs) ; end;"); // prepare procedure call
+    ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+    $ret = ociexecute($mycursor); // Execute function
+    $ret = ociexecute($outrefc); // Execute cursor
+    $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
+    ocifreestatement($mycursor); // close procedure call
+    ocifreestatement($outrefc); // close cursor
+    $actions="";
+    $cantActions="";
+    for($k=0;$k<count($data['ID_ACTIONTYPE']);$k++){
+      $actions=$actions.$data['ACT_NAME'][$k];
+      $accionId=$data['ID_ACTIONTYPE'][$k];
+      $stid = oci_parse($conn, "begin :ret :=COUNTACTION('$accionId'); end;");
+      oci_bind_by_name($stid, ':ret', $cantAct, 200);
+      oci_execute($stid);
+      $cantActions=$cantActions.$cantAct;
+
+      if($k<count($data['ID_ACTIONTYPE'])-1){
+        $actions=$actions."$$";
+        $cantActions=$cantActions."$$";
+      }
+    }
+    $total=$men+$women;
+    echo "<script type='text/javascript'>Set_Jugadores('$men','$women','$total');</script>";
+    echo "<script type='text/javascript'>Set_Equipos('$team');</script>";
+    echo "<script type='text/javascript'>Set_Estadios('$stadium');</script>";
+    echo "<script type='text/javascript'>Set_Partidos('$match');</script>";
+    echo "<script type='text/javascript'>Set_Eventos('$event');</script>";
+    echo "<script type='text/javascript'>Set_Acciones('$actions','$cantActions');</script>";
+    
+?>
