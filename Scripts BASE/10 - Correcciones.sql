@@ -392,7 +392,7 @@ begin
         RAISE;
 END get_Players_Filtros;
 
-CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in number, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
+CREATE OR REPLACE PROCEDURE get_Players_Filtros(p_recordset out sys_refcursor,genero in number, equipo in VARCHAR2, nacionalidad in varchar2, nombre in varchar2, apellido in varchar2, apodo in varchar2) as
 begin
   open p_recordset for
   Select id_player, first_name, last_name, Nickname, t_Shirt_Num, blobdata,getNombrePais(fk_country_id) from player where ( genre=genero or genero is null or genero='') and ( fk_country_id=getIDPais(nacionalidad) or nacionalidad is null or nacionalidad='') AND
