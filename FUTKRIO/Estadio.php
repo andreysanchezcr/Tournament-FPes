@@ -17,48 +17,33 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/InputAnimation.js"></script>
-
   </head>
-
-
-
-<a href="#" onclick="add_Stadium_search('idi','COLOSUS','12000000','COLISEA','un estadio colosal')">add estadium</a>
-<a href="#" onclick="anadir_pais('hola')">pais1</a>
-<a href="#" onclick="anadir_pais('adios')">pais2</a>
-<a href="#" onclick="anadir_ciudad('hola','hola1')">ciudad1</a>
-<a href="#" onclick="anadir_ciudad('adios','hola2')">ciudad2</a>
-
 
 <div class = "caja_Estadios">
   <div class ="DisplayEstadios">
   
     
-  <img id="imagenGrande" class ="resizesable" src  = ""/>
+  <img id="imagenGrande" class ="resizesable" src=""/>
     <div class ="caja_Estadio_Info">
       <div class="new showy"><a href="#" onclick="new_box_show()">Nuevo</a></div>
       <div class="editar showy"><a href="#" onclick="edit_box_show()">Editar</a></div>
-      <!--///////////////////////////-->
-      
-      <div id="EditerBox" class="hiddy">
-        <div class="select-label">Nombre</div>
-        <input id="E_Nombre"></input>
-        <div class="select-label">Capacidad</div>
-        <input id="E_Capacidad"></input>
-                  <div class="select-label">Pais</div>
-                  <select onclick="elegirPais()" id="E_Pais" class="select_filtro_estadio">       
-          
-                    </select>
-        <div class="select-label">Ciudad</div>
-                  <select id="E_Ciudad" class="select_filtro_estadio" >               
-
-                  </select>
-        <div class="select-label">Foto</div>
-        <input type="file" id="E_foto_estadio"></input>
-        <div class="select-label">Descripcion</div>
-        <textarea id="E_Descripcion"rows="10" cols="41">
-        </textarea>
-        <input id="botonNewEdit" type="button" value ="Crear Estadio" onclick="new_Stadium()"></input>
-
+      <form action='guardarEstadio.php' method='POST' enctype="multipart/form-data">
+          <div id="EditerBox" class="hiddy">
+            <div class="select-label">Nombre</div>
+            <input id="E_Nombre"></input>
+            <div class="select-label">Capacidad</div>
+            <input id="E_Capacidad"></input>
+            <div class="select-label">Pais</div>
+            <select onclick="elegirPais()" id="E_Pais" class="select_filtro_estadio"></select>
+            <div class="select-label">Ciudad</div>
+            <select id="E_Ciudad" class="select_filtro_estadio"></select>
+            <div class="select-label">Foto</div>
+            <input type="file" id="E_foto_estadio"></input>
+            <div class="select-label">Descripcion</div>
+            <textarea id="E_Descripcion"rows="10" cols="41">
+            </textarea>
+            <input id="botonNewEdit" type="submit" value ="Crear Estadio" onclick="new_Stadium()"></input>
+        </form>
 </div>
       
       <!--///////////////////////////-->
@@ -140,11 +125,11 @@
         }
 
         echo "<a href='#'' onclick='set_Stadium_Grand(this.id)'' id='$nombre&&$capacidad&&$ciudad&&$descrip&&$source'>
-      <div class='subStadium'>
-        <img id=$id_stadium class ='resizesable' src  = $source/>
-        <div class='subNameStm'>$nombre</div>  
-      </div>
-    </a> ";
+                  <div class='subStadium'>
+                    <img id=$id_stadium class ='resizesable' src=$source/>
+                    <div class='subNameStm'>$nombre</div>  
+                  </div>
+             </a> ";
   }
 
   //CARGAR PAISES Y CIUDADES DEL CATÁLOGO
@@ -181,27 +166,7 @@
   OCILogoff($conn);
 
 ?>
-
-
-
-
-   
-    
+      </div>
     </div>
-</div>
   </div>
-<!--  
-<div class = "Estadio_Carta" >
-    <img class ="resizesable" src  = "http://4.bp.blogspot.com/_tVg7XFxzu0E/S7R8hN85h0I/AAAAAAAADuQ/hqj5ByalmXk/s1600/Moses_Mabhida_World_Cup_Stadium.jpg"/>
-    <div class ="caja_Estadio_Info">
-      <div class = "caja_Nombre_Estadio">
-          <h1>Donut Stadium</h1>
-          <h4>capacidad: 13 000 personas</h3>
-          <h3>never land city</h3>
-      </div>
-      <div class = "caja_Descripcion">
-        Un estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigilloUn estadiesirigillo lleno de personirigillas y lindirigillas barririgillas en el techirigillo
-      </div>
-    </div>
-  </div> -->
 </div>
