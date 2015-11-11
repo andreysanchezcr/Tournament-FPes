@@ -90,7 +90,7 @@
   </div>
   <div class="GrupalPhoto">
  <?php 
-      echo "<img class='resizesable'src=$sourceEquipo/>
+      echo "<img class='resizesable' src= $sourceEquipo>
         </div>
     <div id ='Players' class='Players'></div>
   <div id ='Premios'class='Premios_Box'>
@@ -106,14 +106,14 @@
   $nrows = ocifetchstatement($outrefc, $listaPremios); // fetch data from cursor
   ocifreestatement($mycursor); // close procedure call
   ocifreestatement($outrefc); // close cursor
-
+  echo " <div><h1>PREMIOS</h1></div>";
   for($i=0;$i<count($listaPremios["NAME_AWARD"]);$i++){
 
   $nombrePremio=$listaPremios["NAME_AWARD"][$i];
-
-       echo " <div><h1>$nombrePremio</h1></div>";
+      echo " <div><h2>$nombrePremio</h2></div>";
   }
-
+  $link="Players.php?N=&ap=&nk=&gn=A&eq=$idEquipo&nf=&bAva=0";
+  echo " <div><a href='$link'>Ver jugadores</a></div>";
 ?>
 
 

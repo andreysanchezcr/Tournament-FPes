@@ -59,9 +59,6 @@ CREATE OR REPLACE PROCEDURE getAwardsbyTeam(p_recordset out sys_refcursor, id_ i
 begin
   open p_recordset for
   select id_award,name_award from award where award.fk_team_id=id_;
-  
-  
-
   exception
     when NO_DATA_FOUND THEN
       NULL;
@@ -69,29 +66,11 @@ begin
         RAISE;
 END getAwardsbyTeam;
 
-
-
-
-
 insert into Award(Id_Award,Name_Award,Fk_Team_Id)
 values(5,'Premio numero 1',0);
 commit;
-
-
-
 
 alter table team 
 add fk_flag number(6);
 
 -------
-
-
-
-
-
-
-
-
-
-
-
