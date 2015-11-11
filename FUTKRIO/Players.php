@@ -236,9 +236,9 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 	        }else{
 	        	$source="";
 	        }
-	        $session=1;
+	        $session=0;
 
-	        if(false){
+	        if($session==1){
 		    echo "<a href='lugar'+id+''>
 					    <div class='Player'>
 					    <div class='Jugador_Camiseta'> $camisa </div>
@@ -276,11 +276,7 @@ for($i=0;$i<count($listaPaises["NAME_COUNTRY"]);$i++){
           }
         }
 
-
-
-
-
-			echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
+	echo "</select><a href='#' onclick='Alter_Player( this )'>hola</a><a href='#' onclick='Delete_Player( this )'>delete</a>   </div>';
         ";
  
 
