@@ -7,6 +7,51 @@ $Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
 $Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");
 $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 
+
+  if(isset($_GET["N"]) or isset($_GET["ap"]) or isset($_GET["nk"]) or isset($_GET["gn"]) or isset($_GET["eq"]) or isset($_GET["nf"])){
+
+  	$nombre=$_GET["N"];
+  	$apellido=$_GET["ap"];
+  	$nick=$_GET["nk"];
+  	$gen=$_GET["gn"];
+  	$equipo=$_GET["eq"];
+  	$nacion=$_GET["nf"];
+    
+
+
+  }else{
+     $nombre="";
+  	$apellido="";
+  	$nick="";
+  	$gen="";
+  	$equipo="";
+  	$nacion="";
+
+  }
+
+  include ("conexion.php");
+  $conn = OCILogon($user, $pass, $db);
+
+  $idPartido=10;
+ $var="LuisMoto";
+  $outrefc = ocinewcursor($conn); //Declare cursor variable
+
+  $mycursor = ociparse ($conn, "begin get_Players_Filtros(:curs,'$gen' ,'$equipo' ,'$nacion' ,'$nombre' ,'$apellido' ,'$nick' ); end;"); // prepare procedure call
+  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+  $ret = ociexecute($mycursor); // Execute function
+  $ret = ociexecute($outrefc); // Execute cursor
+  $nrows = ocifetchstatement($outrefc, $listaJugadores); // fetch data from cursor
+  ocifreestatement($mycursor); // close procedure call
+  ocifreestatement($outrefc); // close cursor
+
+
+
+
+
+
+
+
+
 ?>
 	<head>
 		<title>Fafi Futball y Nachos</title>
@@ -123,15 +168,38 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
   </div>
 </div>
 <div id ="PlayersBox" class="PlayersBox">
-  <div>
+<?php  
+
+	  for($p=0;$p<count($listaJugadores["FIRST_NAME"]);$p++){
+    $nombre=$listaJugadores["FIRST_NAME"][$p];
+    $apellido=$listaJugadores["LAST_NAME"][$p];
+    $nick=$listaJugadores["NICKNAME"][$p];
+    $camisa=$listaJugadores["T_SHIRT_NUM"][$p];
+    $foto=$listaJugadores["PHOTO"][$p];
+    $nacionalidad=$listaJugadores["GETNOMBREPAIS(FK_COUNTRY_ID)"][$p];
+
+
+    echo "<a href='lugar'+id+''><div class='Player'><div class='Jugador_Camiseta'> $camisa </div><div class='Jugador_Foto_Box'>$foto</div><div class='Jugador_Nombre' > $nombre $apellido </div><div class='Jugador_Nombre'> $nick </div><div class='Jugador_Pais'> $nacionalidad </div></div></a>
+	";
+
+        
     
-  </div>
+
+    }
+
+
+?>
+
+
+	
+
+ 
 </div>
 
 </body>
 
 	<?php
-		//cargar Equipos
+		//cargar Eq
 		foreach ($Array_Equipos as $key) {
 			echo 	"<script type='text/javascript'>Cargar_Nombres_Equipos('$key')</script>";  
 		}

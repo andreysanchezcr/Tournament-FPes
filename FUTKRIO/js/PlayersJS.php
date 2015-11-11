@@ -114,7 +114,11 @@ function go_All()
   var Gen_Filtro = document.getElementById("Genero_Filtro").value;
   var Equi_Filtro = document.getElementById("Equipo_Filtro").value;
   var Nacion_Filtro = document.getElementById("Nacionalidad_Filtro").value;
-  alert(noombre+'$$'+appellido+'$$'+niick+'$$'+Gen_Filtro+'$$'+Equi_Filtro+'$$'+Nacion_Filtro);  
+
+  window.location='Players.php?N='+noombre+'&ap='+appellido+'&nk='+niick+'&gn='+Gen_Filtro+'+&eq='+Equi_Filtro+'&nf='+Nacion_Filtro;
+ // window.location='Estadio.php?Nb='+noombre;
+
+
 }
 </script>
 
