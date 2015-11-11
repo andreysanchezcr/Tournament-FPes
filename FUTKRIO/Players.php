@@ -7,7 +7,6 @@ $Array_Equipos = array("Costa Rica", "La Sele", "Ticos","La Roja");
 $Array_Nacionalidades = array("Costarricense", "Chileno", "Aleman","Franses");
 $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 
-
   if(isset($_GET["N"]) or isset($_GET["ap"]) or isset($_GET["nk"]) or isset($_GET["gn"]) or isset($_GET["eq"]) or isset($_GET["nf"])){
 
   	$nombre=$_GET["N"];
@@ -49,14 +48,6 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
   $nrows = ocifetchstatement($outrefc, $listaJugadores); // fetch data from cursor
   ocifreestatement($mycursor); // close procedure call
   ocifreestatement($outrefc); // close cursor
-
-
-
-
-
-
-
-
 
 ?>
 	<head>
@@ -177,23 +168,36 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 <?php  
 
 	  for($p=0;$p<count($listaJugadores["FIRST_NAME"]);$p++){
-    $nombre=$listaJugadores["FIRST_NAME"][$p];
-    $apellido=$listaJugadores["LAST_NAME"][$p];
-    $nick=$listaJugadores["NICKNAME"][$p];
-    $camisa=$listaJugadores["T_SHIRT_NUM"][$p];
-    $foto=$listaJugadores["PHOTO"][$p];
-    $nacionalidad=$listaJugadores["GETNOMBREPAIS(FK_COUNTRY_ID)"][$p];
+		    $nombre=$listaJugadores["FIRST_NAME"][$p];
+		    $apellido=$listaJugadores["LAST_NAME"][$p];
+		    $nick=$listaJugadores["NICKNAME"][$p];
+		    $camisa=$listaJugadores["T_SHIRT_NUM"][$p];
+		    $nacionalidad=$listaJugadores["GETNOMBREPAIS(FK_COUNTRY_ID)"][$p];
+		    $idPlayer=$listaJugadores["ID_PLAYER"][$p];
 
-
-    echo "<a href='lugar'+id+''><div class='Player'><div class='Jugador_Camiseta'> $camisa </div><div class='Jugador_Foto_Box'>$foto</div><div class='Jugador_Nombre' > $nombre $apellido </div><div class='Jugador_Nombre'> $nick </div><div class='Jugador_Pais'> $nacionalidad </div></div></a>
-	";
-
-        
-    
-
+		    $query = 'SELECT BLOBDATA FROM PLAYER WHERE ID_PLAYER = :MYBLOBID';
+	        $stmt = oci_parse ($conn, $query);
+	        oci_bind_by_name($stmt, ':MYBLOBID', $idPlayer);
+	        oci_execute($stmt, OCI_DEFAULT);
+	        $arr = oci_fetch_assoc($stmt);
+	        $prueba=$arr['BLOBDATA'];
+	        if($prueba!=""){
+	        	$result = $arr['BLOBDATA']->load();
+	        	$source="data:image/jpeg;base64,".base64_encode( $result );
+	        }else{
+	        	$source="";
+	        }
+		    echo "<a href='lugar'+id+''>
+					    <div class='Player'>
+					    <div class='Jugador_Camiseta'> $camisa </div>
+					    <div class='Jugador_Foto_Box'>
+					    	<img src=$source id='imagenNueva' class='resizesable'>
+					    </div>
+					    <div class='Jugador_Nombre' > $nombre $apellido </div>
+					    <div class='Jugador_Nombre'> $nick </div><div class='Jugador_Pais'> $nacionalidad </div></div>
+			    	</a>
+				  ";
     }
-
-
 ?>
 
 
