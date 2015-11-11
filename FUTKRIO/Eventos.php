@@ -21,13 +21,11 @@ $mov_str = implode(",", $array_premios);
   <div class="Evento_Seg_Titulo">HOMBRES</div>
   <div id="Eventos_Hombres" class="ContenerdorEventos">
     <div class="Evento">
-      <a href="#">
-        <div class="Evento_Foto_Box">foto evento</div>
-      </a>
+      
       <div class="Evento_Info_Box">
         <a href="#">
           <div class="Evento_fecha">marz 20</div>
-          <div class="Evento_Nombre">Juanchis</div>
+          <div class="Evento_Nombre">ddddd</div>
         </a>
         <div class="Evento_Premios">
           <a href="#">
@@ -45,26 +43,8 @@ $mov_str = implode(",", $array_premios);
         </div>
       </div>
     </div>
-    <div class="Evento">
-      <div class="Evento_Foto_Box">foto evento</div>
-      <div class="Evento_Info_Box">
-        <div class="Evento_fecha">marz 20</div>
-        <div class="Evento_Nombre">Juanchis</div>
-        <div class="Evento_Premios">
-          <table></table>
-        </div>
-      </div>
-    </div>
-    <div class="Evento">
-      <div class="Evento_Foto_Box">foto evento</div>
-      <div class="Evento_Info_Box">
-        <div class="Evento_fecha">marz 20</div>
-        <div class="Evento_Nombre">Juanchis</div>
-        <div class="Evento_Premios">
-          <table></table>
-        </div>
-      </div>
-    </div>
+
+
 
 
   </div>
