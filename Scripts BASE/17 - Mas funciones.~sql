@@ -30,6 +30,6 @@ CREATE OR REPLACE FUNCTION getIDCity(ciudad in varchar2, pais IN VARCHAR2)
 RETURN Number
 IS existe Number(6);
 BEGIN
-   select Id_City into existe from City where name_city=ciudad AND fk_country_id=GETIDPAIS(pais);
+   select Id_City into existe from City where name_city=ciudad AND fk_country_id
    return existe;
 END;

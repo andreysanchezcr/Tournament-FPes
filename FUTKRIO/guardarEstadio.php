@@ -10,12 +10,16 @@
 		$descripcion=$_POST["descripcion"];
 
 		//GUARDO BANDERA
+		$stid = oci_parse($conn, "begin :ret :=getIDCity('$ciudad','$pais'); end;");
+		oci_bind_by_name($stid, ':ret', $id_city, 200);
+		oci_execute($stid);
+
 		$stid = oci_parse($conn, "begin :ret :=getSequenceflag(); end;");
 		oci_bind_by_name($stid, ':ret', $id_flag, 200);
 		oci_execute($stid);
 		$lob = oci_new_descriptor($conn, OCI_D_LOB);
 		$imagen="cargarBandera";
-		$stmt = oci_parse($conn, 'INSERT INTO STADIUM (BLOBDATA,ID_FLAG) '
+		$stmt = oci_parse($conn, 'INSERT INTO STADIUM (BLOBDATA,ID_STADIUM,NAME_STADIUM,CAPASITY,FK_CITY_ID) '
              .'VALUES(EMPTY_BLOB(),:id) RETURNING BLOBDATA INTO :BLOBDATA');
 	      oci_bind_by_name($stmt, ':id', $id_flag);
 	      oci_bind_by_name($stmt, ':BLOBDATA', $lob, -1, OCI_B_BLOB);
