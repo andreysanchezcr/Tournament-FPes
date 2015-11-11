@@ -1,12 +1,3 @@
-<?php /*Ocultar menu de busqueda avanzada*/ ?>
-
-		<script type="text/javascript"> 
-			function Mostrar_Filtros()
-			{
-				$('#Busqueda_Avansada').toggleClass("Hidy_Class");
-			}
-		</script>
-
 
 <?php /*Funcion para cargar catalogo de Equipos para filtros en busqueda avansada*/ ?>
 		<script type="text/javascript"> 
@@ -36,6 +27,3 @@
 					select.appendChild(option);
 			}
 		</script>
-
-
-

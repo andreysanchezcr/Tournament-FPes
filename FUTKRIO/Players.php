@@ -15,6 +15,13 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
   	$gen=$_GET["gn"];
   	$equipo=$_GET["eq"];
   	$nacion=$_GET["nf"];
+  	$bAvan=$_GET["bAva"];
+
+  	if($bAvan=="0"){
+  		$gen="";
+	  	$equipo="";
+	  	$nacion="";
+  	}
 
   	if($gen=="A"){
   		$gen='';
@@ -25,13 +32,12 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
   	}
 
   }else{
-     $nombre="";
+    $nombre="";
   	$apellido="";
   	$nick="";
   	$gen="";
   	$equipo="";
   	$nacion="";
-
   }
 
   include ("conexion.php");
@@ -62,6 +68,16 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script language="javascript" type="text/javascript" src="js/InputAnimation.js"></script>
+		<script type="text/javascript">
+			function Mostrar_Filtros(){
+				$('#Busqueda_Avansada').toggleClass("Hidy_Class");
+				if(document.getElementById("busquedaAvan").value=="0"){
+					document.getElementById("busquedaAvan").value="1";
+				}else{
+					document.getElementById("busquedaAvan").value="0";
+				}
+			}
+		</script>
 
 	</head>
 	<body>
@@ -93,7 +109,7 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 			</li>
 
 
-			<li><a href="#"  onclick="Mostrar_Filtros();">Busqueda Avansada </a></li>
+			<li><input id="busquedaAvan" value="0" style="display: none;"><a href="#" onclick="Mostrar_Filtros();">Búsqueda Avanzada </a></li>
 			<li><a href="#"  onclick="go_All();">Buscar</a></li>
 		</ul>
 		<div id="Busqueda_Avansada" class="Hidy_Class">

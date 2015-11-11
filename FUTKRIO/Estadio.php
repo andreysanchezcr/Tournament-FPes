@@ -118,7 +118,6 @@
 
   $prueba="hola ".count($data["ID_STADIUM"]);
   echo " <div id ='subStadiumBox'class='subStadiumBox'>";
-  echo "<script type='text/javascript'>alert('$prueba');</script>";
   for($p=0;$p<count($data["ID_STADIUM"]);$p++){
         $nombre=$data["NAME_STADIUM"][$p];
         $capacidad=$data["CAPASITY"][$p];
