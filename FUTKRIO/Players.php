@@ -233,4 +233,22 @@ $Array_Jugadores = array("Chiqui Brenes", "El chunque", "Guanchope","Navas");
 		foreach ($Array_Nacionalidades as $key) {
 			echo 	"<script type='text/javascript'>Cargar_Nombres_Paises('$key')</script>";  
 		}
+
+
+		//CARGAR PAISES Y CIUDADES DEL CATÁLOGO
+	  $outrefc = ocinewcursor($conn); //Declare cursor variable
+	  $mycursor = ociparse ($conn, "begin get_AllCountries(:curs) ; end;"); // prepare procedure call
+	  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+	  $ret = ociexecute($mycursor); // Execute function
+	  $ret = ociexecute($outrefc); // Execute cursor
+	  $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
+	  ocifreestatement($mycursor); // close procedure call
+	  ocifreestatement($outrefc); // close cursor
+
+	  for($i=0;$i<count($data['ID_COUNTRY']);$i++){
+	    $pais=$data['NAME_COUNTRY'][$i];
+	    echo "<script type='text/javascript'>anadir_pais('$pais');</script>";
+	  }
+
+	  OCILogoff($conn);
 	?>

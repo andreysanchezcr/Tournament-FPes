@@ -122,5 +122,15 @@ function go_All()
 
 
 }
+
+function anadir_pais(pais)
+{
+  var select = document.getElementById('nacion');
+  var option = document.createElement('option');
+  option.text=pais;
+  option.value=pais;
+  select.add(option);
+  cantPaises++;
+}
 </script>
 
