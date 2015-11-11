@@ -30,17 +30,17 @@
       <form action='guardarEstadio.php' method='POST' enctype="multipart/form-data">
           <div id="EditerBox" class="hiddy">
             <div class="select-label">Nombre</div>
-            <input id="E_Nombre"></input>
+            <input id="E_Nombre" name="nombre"></input>
             <div class="select-label">Capacidad</div>
-            <input id="E_Capacidad"></input>
+            <input id="E_Capacidad" name="capacidad"></input>
             <div class="select-label">Pais</div>
-            <select onclick="elegirPais()" id="E_Pais" class="select_filtro_estadio"></select>
+            <select onclick="elegirPais()" name="pais" id="E_Pais" class="select_filtro_estadio"></select>
             <div class="select-label">Ciudad</div>
-            <select id="E_Ciudad" class="select_filtro_estadio"></select>
+            <select id="E_Ciudad" name="ciudad" class="select_filtro_estadio"></select>
             <div class="select-label">Foto</div>
-            <input type="file" id="E_foto_estadio"></input>
+            <input type="file" name="foto" id="E_foto_estadio"></input>
             <div class="select-label">Descripcion</div>
-            <textarea id="E_Descripcion"rows="10" cols="41">
+            <textarea id="E_Descripcion" name="descripcion" rows="10" cols="41">
             </textarea>
             <input id="botonNewEdit" type="submit" value ="Crear Estadio" onclick="new_Stadium()"></input>
         </form>
