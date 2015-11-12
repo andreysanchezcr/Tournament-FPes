@@ -55,7 +55,7 @@
 		oci_bind_by_name($stid, ':ret', $idteam2, 200);
 		oci_execute($stid);
 		$fechaPartido=$subArray[2];
-		$stid = oci_parse($conn, "begin lu.insert_Match('$idteam1','$idteam2','$fechaPartido'); end;");
+		$stid = oci_parse($conn, "begin lu.insert_Match('$idteam1','$idteam2','$fechaPartido','$idEvento'); end;");
 		oci_execute($stid);
 	}
 

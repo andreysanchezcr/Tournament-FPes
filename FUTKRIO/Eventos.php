@@ -7,12 +7,7 @@ $array_premios = array("Balon Oro", "$1000", "Un Barriton","Una Chica");
 
 $mov_str = implode(",", $array_premios);
 //$id=$_GET["id"];
-
-
-
 ?>
-
-
 <head>
   <meta charset="utf-8" />
   <meta description="Love Ink una pagina web que no robara tu informacion para conquistar el mundo">
@@ -45,15 +40,15 @@ ocifreestatement($outrefc); // close cursor
     $nombreEvento=$listaEventos["NAME_EVENT"][$p];
     $fechaInicio=$listaEventos["START_DATE"][$p];
     $fechaFin=$listaEventos["END_DATE"][$p];
-    echo "<div class='Evento'>   
+    $idEvento=$listaEventos["ID_EVENT"][$p];
+    $link="EstadisticasEvento.php?id=".$idEvento;
+    echo "<div class='Evento'>
+      <a href=$link>
       <div class='Evento_Info_Box'>
-        <a href='#''>
-          <div class='Evento_fecha'> $fechaInicio -- $fechaFin </div>
-          <div class='Evento_Nombre'> $nombreEvento </div>
-        </a>
+        <div class='Evento_fecha'> $fechaInicio -- $fechaFin </div>
+        <div class='Evento_Nombre'> $nombreEvento </div>
         <div class='Evento_Premios'>
-          <a href='#'>
-            <table>
+          <table>
               <caption>Premios</caption>
               <tr>
                 <td>,</td>
@@ -61,23 +56,12 @@ ocifreestatement($outrefc); // close cursor
                 <td>,</td>
               </tr>
             </table>
-          </a>
         </div>
       </div>
+      </a>
     </div>";
-
-        
-    
-
     }
-
-
 ?>
-  
-
-
-
-
 
   </div>
   <div class="Evento_Seg_Titulo">MUJERES</div>

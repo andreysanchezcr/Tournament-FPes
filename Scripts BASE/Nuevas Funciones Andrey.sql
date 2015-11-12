@@ -1,18 +1,16 @@
-
 CREATE OR REPLACE PROCEDURE filtroEstadios(p_recordset out sys_refcursor, pais in varchar2, ciudadd in varchar2, nombre in varchar2) as
 begin
   open p_recordset for
 
-  select stadium.id_stadium,stadium.name_stadium,stadium.capasity,stadium.photo,stadium.description,stadium.fk_city_id from stadium
+  select stadium.id_stadium,stadium.name_stadium,stadium.capasity,stadium.descripcion,stadium.fk_city_id from stadium
   where (getIDCountry(pais)=getFkCity(ciudadd) or pais is null or pais='' or ciudadd is null or ciudadd='')  and (stadium.name_stadium like nombre || '%' or nombre is null or nombre='');
-  
+
   exception
     when NO_DATA_FOUND THEN
       NULL;
       WHEN OTHERS THEN
         RAISE;
 END filtroEstadios;
-
 
 CREATE OR REPLACE FUNCTION getIDCountry(pais in varchar2)
 RETURN NUMBER
@@ -83,6 +81,8 @@ begin
       WHEN OTHERS THEN
         RAISE;
 END getInfoEvents;
+
+drop procedure getTotalPartidos;
 
 CREATE OR REPLACE FUNCTION getTotalPartidos(evento in number, equipo in number)
 RETURN number
@@ -342,16 +342,18 @@ END; --
 grant execute ON dbms_scheduler to ge;
 grant create job to ge;
 
+CREATE OR REPLACE PROCEDURE insert_Match(equipo1 in number,equipo2 in number,fecha in varchar2,idEvento IN NUMBER)
+AS tot_emps NUMBER;
+BEGIN
+  INSERT INTO match(id_match,fk_teamone_id,fk_teamtwo_id,start_date,fk_event)
+    VALUES(seq_match.nextval,equipo1,equipo2,TO_DATE(fecha,'mm/dd/yyyy'),idEvento);
+  COMMIT;
+  tot_emps:=tot_emps-1;
+END;
 
-
-
-
-
-
-
-
-
-
-
-
+select * from event_x_team;
+select * from action_type;
+select * from match;
+insert into action_type(id_actiontype,act_name)
+values(0,'Falta');
 

@@ -42,7 +42,7 @@
       <?php  
 
     $equipo=0;
-    $evento=103;
+    $evento=$_GET["id"];
 
     $outrefc = ocinewcursor($conn); //Declare cursor variable
     $mycursor = ociparse ($conn, "begin getInfoEventsById(:curs, $evento) ; end;"); // prepare procedure call
@@ -69,7 +69,7 @@
     ocifreestatement($mycursor); // close procedure call
     ocifreestatement($outrefc); // close cursor
 
-    var_dump($data2);
+    //var_dump($data2);
 
 
     echo "<div id='Evento_U' class='Evento_U'>
@@ -139,28 +139,6 @@ echo "
         <div class='stak partidos_GolContra'> $enContra </div>
         <div class='stak partidos_GolDiferencia'> $diferencia </div>
       </div>";
-
-    if($k!=0){
-        if($nuevoTemporal!=$temporal){
-          $temporal=$nuevoTemporal;
-      echo "
-
-          </div>
-        </div>
-
-    <div class='UnGrupo'>
-      <div class='GroupName'>Grupo $nuevoTemporal</div>
-
-";
-
-        
-      
-      }
-    }
-
-
-
-
       }
 
 
