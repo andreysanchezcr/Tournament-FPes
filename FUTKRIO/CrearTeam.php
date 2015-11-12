@@ -1,7 +1,6 @@
 <?php  
   include 'js/CrearTeamJS.php';
 ?>
-
   <head>
     <title>Fafi Futball y Nachos</title>
     <title>Crear Equipo</title> 
@@ -14,11 +13,7 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/InputAnimation.js"></script>
-
   </head>
-
-
-
 <a href ="#" onclick="add_Player('Roberto Carnier','12')">AddPlayer</a>
 <a href ="#" onclick="add_Premios('STARDUST TOURNEMENT')">AddPREMIOS</a>
 <a href ="#" onclick="set_TeamName('Barcelona')">change</a>
@@ -41,27 +36,30 @@
             <div class="cargarTitle2">Cargar Foto Grupal del Equipo</div>
         <input type="file" class="CargarImagen2" name="cargarFoto"></input>
     </div>
-      <div><h1 class="JugadorLabel">Jugadores</h1>
-        <div>Agregar Jugador</div>
-        <input placeholder="Nombre"></input>
-        <input placeholder="Apellido"></input>
-        <input placeholder="Apodo"></input>
-        <input type="button" value="Buscar">
-        </input>
-        <div id="resultados">
-          <div>Jugador Nombre
-            <input type="button" value="Agregar al Equipo"></input>
-          </div> 
-          <div>Jugador Nombre
-            <input type="button" value="Agregar al Equipo"></input>
-          </div>  
-        </div>
-      </div>
-      <div id ="Players" class="Players"></div>
-      
-    <div id ="Premios"class="Premios_Box">
-      
-    <div><h1>Premios</h1></div>
-    </div>
+  <div class="PlayerAdder">
+  <select id ="AdderSelect"></select>
+  <input type="button" onclick="contratarJugador()" value="Agregar Jugador"></input>  
+  </div>
+  <div id="PlayerHolder"></div>
   </div>
 </form>
+
+<?php
+include ("conexion.php");
+  $conn = OCILogon($user, $pass, $db);
+  $outrefc = ocinewcursor($conn); //Declare cursor variable
+  $mycursor = ociparse ($conn, "begin get_AllPlayers(:curs); end;"); // prepare procedure call
+  ocibindbyname($mycursor, ':curs', $outrefc, -1, OCI_B_CURSOR); // bind procedure parameters
+  $ret = ociexecute($mycursor); // Execute function
+  $ret = ociexecute($outrefc); // Execute cursor
+  $nrows = ocifetchstatement($outrefc, $data); // fetch data from cursor
+  ocifreestatement($mycursor); // close procedure call
+  ocifreestatement($outrefc); // close cursor
+  //var_dump($data);
+  for($p=0;$p<count($data["ID_PLAYER"]);$p++){
+    $playerId=$data["ID_PLAYER"][$p];
+    $nombre=$data["FIRST_NAME"][$p]." ".$data["LAST_NAME"][$p]." (".$data["NICKNAME"][$p].")";
+    echo "<script type='text/javascript'>anadir('$nombre','$playerId');</script>";
+  }
+  OCILogoff($conn);
+?>

@@ -330,14 +330,12 @@ DBMS_SCHEDULER.create_job(
   job_type => 'PLSQL_BLOCK',
   job_action => 'BEGIN respaldarInfoEstadistica;END;',
   start_date => SYSTIMESTAMP,
-  repeat_interval => 'freq=daily',
+  repeat_interval => NEXT_DAY(TRUNC(SYSDATE))+23/24,
   end_date => NULL,
   enabled => true,
   comments => 'Respalda informacion sobre grupos'
 );
 END; --
-
-
 
 grant execute ON dbms_scheduler to ge;
 grant create job to ge;
@@ -357,3 +355,17 @@ select * from match;
 insert into action_type(id_actiontype,act_name)
 values(0,'Falta');
 
+
+CREATE OR REPLACE PROCEDURE get_AllPlayers(p_recordset out sys_refcursor) as
+begin
+  open p_recordset for
+  select Player.Id_Player,Player.First_Name,Player.Last_Name,player.nickname from Player;
+  exception
+    when NO_DATA_FOUND THEN
+      NULL;
+      WHEN OTHERS THEN
+        RAISE;
+END get_AllPlayers;
+
+
+select * from player;
