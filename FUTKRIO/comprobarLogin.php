@@ -30,6 +30,7 @@
         if($existe>0){
             $error="Bienvenido Admin!!";
             $lugar="index.php";
+            $_SESSION['id']=1;
             echo "<script type='text/javascript'>alert('$error');</script>";
         }else{
             $error="Usuario no registrado";

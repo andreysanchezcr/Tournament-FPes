@@ -26,7 +26,7 @@
 <form action='guardarNuevoEquipo.php' method='POST' enctype="multipart/form-data">
   <div id="crearEquipo" class="Editor">
   <input name="crearEquipo" type="submit" value ="Crear Equipo" class="newTeamButton"></input>
-  <a href="team.php"><input type="button" value ="Cancelar" class="newTeamButton"></input></a></div>
+  <a href="BuscarEquipos.php"><input type="button" value ="Cancelar" class="newTeamButton"></input></a></div>
   <div id ="TeamBox"class="TeamBox" >
     <div class="Info">
       <input id="teamName"placeholder=" Nombre del Equipo" class="Team_Name" name="nombreEquipo"></input>

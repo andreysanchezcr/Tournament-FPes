@@ -22,8 +22,7 @@ $mov_str = implode(",", $array_premios);
 </head>
 
 <body>
-  <a href="#" onclick="AgregarEventoHombres('Eventu','una fecha','7','<?php echo $mov_str ?>');">boton</a>   
-  <a href="#" onclick="ClearEventoHombres();">clear</a>
+  <h1><button onClick="window.location='Grupos.php'" value="Agregar Evento">Agregar Evento</button></h1>
   <div class="Evento_Seg_Titulo">HOMBRES</div>
   <div id="Eventos_Hombres" class="ContenerdorEventos">
 

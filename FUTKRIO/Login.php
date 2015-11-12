@@ -12,12 +12,7 @@
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 		<script language="javascript" type="text/javascript" src="js/InputAnimation.js">
 		</script>
-
-
 	</head>
-
-
-
 	<body>
 		<div>
 			<form action='comprobarLogin.php' method='POST' enctype="multipart/form-data">
@@ -35,5 +30,5 @@
 				</div>
 				<input type="submit" value="Entrar" name="entrar" id="Login"></input>
 			</form>
-		</div>			
+		</div>
 	</body>

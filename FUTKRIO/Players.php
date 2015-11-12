@@ -2,7 +2,7 @@
 	include 'js/php_jscrips.php';
 	include 'js/PlayersJS.php';
     include 'html/menuPrincipal.php';
-    $session=$_SESSION['ID'];
+    $session=$_SESSION['id'];
 /*Variables*/
   if(isset($_GET["N"]) or isset($_GET["ap"]) or isset($_GET["nk"]) or isset($_GET["gn"]) or isset($_GET["eq"]) or isset($_GET["nf"])){
 
