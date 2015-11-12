@@ -94,6 +94,49 @@ function holas()
   }
 }
 
+var ArregloPartidos=[];
 
+function agregarpartido()
+{
+  var ArregloVS=[]
+  var TA =document.getElementById("S_Team_A").value;
+  var TB =document.getElementById("S_Team_B").value;     
+ 
+  ArregloVS.push(TA+'$$'+TB);
+  ArregloVS.push(TA); 
+  ArregloVS.push(TB); 
+
+  ArregloPartidos.push(ArregloVS);
+  
+  document.getElementById("cajapartidos").innerHTML+=''+
+      '<div id="'+TA+'$$'+TB+'" class="MachtItem">'+
+          '<div class="Math">'+TA+'_VS_'+TB+'</div>'+
+              '<input onclick="borrarMath(this)" type="button" class="BotonX_Equipo" value="X"></input>'+
+            '</div>';
+  
+}
+
+function borrarMath(el)
+{
+  var padre = el.parentNode;
+  for(var i=0; i<ArregloPartidos.length;i++)
+  { 
+    if(ArregloPartidos[i][0]==padre.id)      
+    {
+      ArregloPartidos.splice(i,1);
+    }
+    
+  }
+  padre.remove();
+}
+
+function holas2()
+{
+  for(var i=0; i<ArregloPartidos.length;i++){
+    for(var j=0; j<ArregloPartidos[i].length;j++){
+      alert(ArregloPartidos[i][j]);
+    }
+  }
+}
 
 </script>

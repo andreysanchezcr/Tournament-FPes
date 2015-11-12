@@ -46,5 +46,19 @@
 
 </div>
 
-
+<div>
+    <div>
+       <select id ="S_Team_A">
+      <option value = "liga">liga</option>
+         <option value = "real">real</option>
+      </select>
+       <div id="vs">VS</div>
+       <select id ="S_Team_B">
+      <option value = "sapri">sapri</option>
+      <option value = "barsa">barsa</option>   
+      </select>
+       <input type="button" onclick="agregarpartido()"value=agregar></input>
+    </div>
+    <div id=cajapartidos></div>
+  </div>
   </body>

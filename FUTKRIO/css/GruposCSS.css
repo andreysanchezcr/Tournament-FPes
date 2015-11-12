@@ -211,3 +211,9 @@
   overflow:hidden;
   height:50px;
 }
+
+#S_Team_A ,#S_Team_B,#vs
+{
+   width: 100px;
+  display:inline-block;
+}
