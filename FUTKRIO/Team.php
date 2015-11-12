@@ -73,10 +73,18 @@
 <a href ="#" onclick="add_Premios('STARDUST TOURNEMENT')">AddPREMIOS</a>
 <a href ="#" onclick="set_TeamName('Barcelona')">change</a>
 
-<div id="crearEquipo" class="Editor"> 
+<div id="crearEquipo" class="Editor">
+<?php
+  $sesion=$_SESSION["id"];
+  if($sesion==0){
+
+  }else{?>
 <a href="CrearTeam.php"><input type="button" value ="Crear Nuevo Equipo" class="newTeamButton">  </input></a>
 <input type="button" value ="Editar Equipo Actual" class="EditTeamButton"></input>
 <input type="button" value ="Eliminar  Equipo" class="DeleteTeamButton"></input></div>
+<?php
+  }
+?>
 <div id ="TeamBox"class="TeamBox" >
   <div class="Info">
 

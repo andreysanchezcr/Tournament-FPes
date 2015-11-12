@@ -17,7 +17,15 @@ $mov_str = implode(",", $array_premios);
 </head>
 
 <body>
-  <h1><button onClick="window.location='Grupos.php'" value="Agregar Evento">Agregar Evento</button></h1>
+  <?php
+    $sesion=$_SESSION["id"];
+    if($sesion==0){
+        //NADA
+    }else{?>
+      <h1><button onClick="window.location='Grupos.php'" value="Agregar Evento">Agregar Evento</button></h1>
+    <?php
+      }
+    ?>
   <div class="Evento_Seg_Titulo">HOMBRES</div>
   <div id="Eventos_Hombres" class="ContenerdorEventos">
 

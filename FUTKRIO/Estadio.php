@@ -25,8 +25,17 @@
     
   <img id="imagenGrande" class ="resizesable" src=""/>
     <div class ="caja_Estadio_Info">
+      <?php
+        $sesion=$_SESSION["id"];
+        if($sesion==0){
+
+        }else{
+        ?>
       <div class="new showy"><a href="#" onclick="new_box_show()">Nuevo</a></div>
       <div class="editar showy"><a href="#" onclick="edit_box_show()">Editar</a></div>
+      <?php
+        }
+      ?>
       <form action='guardarEstadio.php' method='POST' enctype="multipart/form-data">
           <div id="EditerBox" class="hiddy">
             <div class="select-label">Nombre</div>
